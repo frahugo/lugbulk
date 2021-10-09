@@ -11,6 +11,7 @@
   },
   "author": "Hugo Frappier",
   "license": "ISC",
-  "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "yargs": "^17.2.1"
+  }
 }
