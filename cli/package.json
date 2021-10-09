@@ -12,6 +12,7 @@
   "author": "Hugo Frappier",
   "license": "ISC",
   "dependencies": {
-    "yargs": "^17.2.1"
+    "yargs": "^17.2.1",
+    "lugbulk-lib": "file:../lib"
   }
 }

@@ -1,0 +1,11 @@
+{
+  "name": "lugbulk-lib",
+  "version": "1.0.0",
+  "description": "Domain logic for LugBulk",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo Frappier",
+  "license": "ISC"
+}
