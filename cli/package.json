@@ -1,0 +1,16 @@
+{
+  "name": "lugbulk-cli",
+  "version": "1.0.0",
+  "description": "CLient tool for LugBulk",
+  "bin": {
+    "lugbulk": "bin/lugbulk"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo Frappier",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {}
+}
