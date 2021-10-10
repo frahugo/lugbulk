@@ -1,5 +1,8 @@
 const chalk = require("chalk");
 const TextTable = require("text-table");
+const Papa = require("papaparse");
+const fs = require("fs");
+
 const { Element } = require("lugbulk-lib/element");
 const { Order } = require("lugbulk-lib/order");
 
@@ -19,6 +22,13 @@ exports.handler = function (argv) {
     console.log(TextTable(table));
     console.log("Total of %d elements", order.elements.length);
   } else {
-    console.log("Listing elements from %s and output to %s", argv.input, argv.output);
+    var table = [["elementId", "name", "color"]];
+    for (var elem of order.elements) {
+      table.push([elem.id, elem.name, elem.color]);
+    }
+
+    fs.writeFile(argv.output, Papa.unparse(table), function (err) {
+      if (err) return console.log(err);
+    });
   }
 };
