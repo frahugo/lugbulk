@@ -1,21 +1,24 @@
-// const { Element } = require("../../../../lib/element.js");
+const chalk = require("chalk");
+const TextTable = require("text-table");
 const { Element } = require("lugbulk-lib/element");
+const { Order } = require("lugbulk-lib/order");
 
 exports.command = "elements";
 exports.desc = "List elements from a LugBulk order";
 exports.builder = {};
 exports.handler = function (argv) {
-  const element = new Element("123456", "BRICK 1 X 1", "black");
+  const order = new Order();
 
-  console.log(element);
+  order.load(argv.input);
 
   if (argv.output === undefined) {
-    console.log("Listing elements from %s", argv.input);
+    var table = [];
+    for (var elem of order.elements) {
+      table.push([chalk.yellow.bold(elem.id), elem.name, chalk.green.green(elem.color)]);
+    }
+    console.log(TextTable(table));
+    console.log("Total of %d elements", order.elements.length);
   } else {
-    console.log(
-      "Listing elements from %s and output to %s",
-      argv.input,
-      argv.output
-    );
+    console.log("Listing elements from %s and output to %s", argv.input, argv.output);
   }
 };
