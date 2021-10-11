@@ -1,4 +1,4 @@
-exports.command = "print <elements>";
+exports.command = "print <elements|test>";
 exports.desc = "print elements from a Lugbulk CSV file";
 exports.builder = function (yargs) {
   return yargs.commandDir("print_cmds");
