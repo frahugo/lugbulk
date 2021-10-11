@@ -5,6 +5,8 @@ Tools for helping with the task of sorting parts from a LUG bulk.
 
 ![label example](/doc/example.jpg)
 
+![command line demo](/doc/command-line-demo.gif)
+
 -----
 
 The tools were developed on Mac OS X.
