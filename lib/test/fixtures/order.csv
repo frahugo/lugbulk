@@ -5,11 +5,11 @@ Vous devez accepter des variations des quantités de 5% à la livraison; Livrais
 Deux paiements pourraient être exigés : Un à la commande (~100%); Un à la livraison (frais sup),,,,,,,,,,,,,,buyer1,buyer2,,,
 Element ID,Photo,Description,LEGO Color,EUR,Qte totale achat,BL Color,Note,Pseudo,B&P CAD script,BL Sold Avg Price,CAD,Sélect?,,Acheteur,Acheteur,Total amount CAD,"Price/part
 CAD",
-6330148,,ANGULAR PLATE 1.5 BOT. 1X2 2/2,SAND YELLOW,0.03,2750,Dark Tan,Sélect21,yeager25,0.160,0.125,0.045,O,,,,0.0000,0.0000,41
-6139364,,BASE PLATE 32X32,DK. ST. GREY,2.24,300,Dark Bluish Gray,BasePl,elidostudio,9.290,11.895,3.330,O,,,,51.8171,4.3181,81
-6321716,,"BEAM 15 MODULE, W/ 4.85 HOLE, NO. 1",BLACK,0.22,2150,Black,Sélect12,goffy,0.900,4.262,0.327,O,,,,0.0000,0.0000,32
+6330148,,ANGULAR PLATE 1.5 BOT. 1X2 2/2,SAND YELLOW,0.03,2750,Dark Tan,Sélect21,yeager25,0.160,0.125,0.045,O,,100,,0.0000,0.0000,41
+6139364,,BASE PLATE 32X32,DK. ST. GREY,2.24,300,Dark Bluish Gray,BasePl,elidostudio,9.290,11.895,3.330,O,,200,,51.8171,4.3181,81
+6321716,,"BEAM 15 MODULE, W/ 4.85 HOLE, NO. 1",BLACK,0.22,2150,Black,Sélect12,goffy,0.900,4.262,0.327,O,,300,50,0.0000,0.0000,32
 6267495,,"BRICK 1X1, W/ 2 KNOBS, CORNER",MED. ST-GREY,0.02,2850,Light Bluish Gray,PièceP26,Captain_TomBrick,0.140,0.614,0.030,O,,,50,0.0000,0.0000,74
 4211388,,BRICK 1X2,MED. ST-GREY,0.02,9150,Light Bluish Gray,Sélect01,charlesb,0.120,0.188,0.030,O,,,400,0.0000,0.0000,21
 6123809,,BRICK 1X2X1 2/3 W/4 KNOBS,MED. ST-GREY,0.03,3750,Light Bluish Gray,Concours 2020-01,ThyClin,0.260,0.163,0.045,N,,,50,0.0000,0.0000,3
 ,,,,,,,,,,,,,,,,,,
- ,,,,,,,,,,,,,,,,,,
+" ",,,,,,,,,,,,,,,,,,
