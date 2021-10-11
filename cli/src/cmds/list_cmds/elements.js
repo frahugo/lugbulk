@@ -3,8 +3,8 @@ const TextTable = require("text-table");
 const Papa = require("papaparse");
 const fs = require("fs");
 
-const { Element } = require("lugbulk-lib/element");
-const { Order } = require("lugbulk-lib/order");
+const { Element } = require("lugbulk-lib/src/element");
+const { Order } = require("lugbulk-lib/src/order");
 
 exports.command = "elements";
 exports.desc = "List elements from a LugBulk order";
