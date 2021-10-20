@@ -39,6 +39,9 @@
   </head>
   <body>
     {{#each order.elements}}
+    <div style="float: right">
+      <img src="https://rondotruck.com/parts/{{this.id}}.jpg" width="64px" height="64px" alt="">
+    </div>
     <h1>{{this.id}}</h1>
     <p>{{this.name}} :: <i>{{this.color}}</i></p>
 
