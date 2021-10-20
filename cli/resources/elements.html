@@ -1,0 +1,78 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+      html {
+        font-size: 12px;
+        font-family: 'Ubuntu' !important;
+        font-weight: 400;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table.summary {
+        margin-top: 30px;
+        width: 35%;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+
+      th, td {
+        padding: 0.25em 1em;
+        text-align: left;
+        font-size: 0.8em;
+      }
+
+      th {
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    {{#each order.elements}}
+    <h1>{{this.id}}</h1>
+    <p>{{this.name}} :: <i>{{this.color}}</i></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Pseudo</th>
+          <th>Quantité</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.lots}}
+        <tr>
+          <td>{{firstName ../../order this.pseudo}}</td>
+          <td>{{lastName ../../order this.pseudo}}</td>
+          <td>{{this.pseudo}}</td>
+          <td>{{this.quantity}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <table class="summary">
+      <tbody>
+        <tr>
+          <td>Quantité réelle<br><br><br></td>
+          <td>Balance No.<br><br><br></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="page-break-after: always"></div>
+    {{/each}}
+  </body>
+</html>

@@ -10,7 +10,7 @@ module.exports = () => {
     })
     .option("o", {
       alias: "output",
-      describe: "Output file (CSV format)",
+      describe: "Output file (CSV for list command, PDF for pdf command)",
       type: "string",
       demandOption: false,
     })

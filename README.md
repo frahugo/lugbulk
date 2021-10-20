@@ -65,3 +65,11 @@ To print the labels for the lots:
 To show help:
 
     bin/lugbulk
+
+Development
+---
+
+To run the tests and watch for changes:
+
+    cd lib
+    npm run test

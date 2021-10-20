@@ -1,5 +1,5 @@
-exports.command = "print <elements|test>";
-exports.desc = "print elements from a Lugbulk CSV file";
+exports.command = "print <elements|lots|test>";
+exports.desc = "print labels or sheets from a Lugbulk CSV file";
 exports.builder = function (yargs) {
   return yargs.commandDir("print_cmds");
 };
