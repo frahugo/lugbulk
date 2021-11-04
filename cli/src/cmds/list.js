@@ -1,5 +1,5 @@
-exports.command = "list <elements|lots>";
-exports.desc = "list elements or lots from a Lugbulk CSV file";
+exports.command = "list <type>";
+exports.desc = "List elements or lots";
 exports.builder = function (yargs) {
   return yargs.commandDir("list_cmds");
 };

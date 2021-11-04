@@ -5,12 +5,12 @@ const Dymo = require("dymojs");
 const { Element } = require("lugbulk-lib/src/element");
 const { Order } = require("lugbulk-lib/src/order");
 
-exports.command = "test";
-exports.desc = "Print a test from a LugBulk order";
+exports.command = "test <order_csv_file>";
+exports.desc = "Print a test label from a LugBulk order";
 exports.builder = {};
 exports.handler = function (argv) {
   const order = new Order();
-  order.load(argv.input);
+  order.load(argv.order_csv_file);
   print(order);
 };
 
