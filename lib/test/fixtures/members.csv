@@ -1,0 +1,4 @@
+id,#,Prenom,Nom,Pseudo,Ville,Région,Courriel,StatutLEGO,Cotisation,Exposant,From membres.xlsx,Selecteur,Acheteur,Tri par EXPOSANT (z to a) + COTISATION (z to a) + PSEUDO; Ajustement numérotation colonne A
+1,194,First1,Last1,buyer1,city1,region1,first@example.com,1,1,2,,TRUE,TRUE,
+2,192,First2,Last2,buyer2,city2,region2,second@example.com,1,1,2,,TRUE,TRUE,
+3,165,First3,Last3,non-buyer,,,third@example.com,1,1,2,,TRUE,TRUE,
