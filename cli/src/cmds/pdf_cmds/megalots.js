@@ -7,14 +7,14 @@ const Handlebars = require("handlebars");
 const { Element } = require("lugbulk-lib/src/element");
 const { Order } = require("lugbulk-lib/src/order");
 
-exports.command = "megalots <buyers_csv_file>";
+exports.command = "megalots <order_csv_file>";
 exports.desc = "Generate PDF file for megalots";
 exports.builder = {};
 exports.handler = function (argv) {
   const order = new Order();
   const output = argv.output === undefined ? "./megalots.pdf" : argv.output;
 
-  order.load(argv.buyers_csv_file);
+  order.load(argv.order_csv_file);
   print(order, output);
 };
 
