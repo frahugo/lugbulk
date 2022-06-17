@@ -73,3 +73,15 @@ To run the tests and watch for changes:
 
     cd lib
     npm run test
+
+QUELug instructions
+---
+
+For a project support or LUG bulk order, first, you need to export sheet with the right
+buyers and quantities (the order sheet, not the nominations sheet).
+
+- First, open the Excel sheet and click on the tab at the bottom to make the order sheet active.
+- Then make sure that the first row has LUG member IDs that are included in the bulk. Clear all the other
+cells on that row.
+- Then select "File > Save As" and select the CSV UTF-8 format. Excel will complain that the format
+does not support multiple sheets and that it will export the active sheet: click on OK.
