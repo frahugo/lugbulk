@@ -17,7 +17,18 @@
 
       table.summary {
         margin-top: 30px;
-        width: 35%;
+        width: 45%;
+        table-layout: fixed;
+      }
+      table.summary td {
+        font-size: 0.4em;
+        vertical-align: top;
+        height: 40px;
+      }
+      table.summary p.total-quantity {
+        margin: 0;
+        padding-top: 5px;
+        font-size: 2.5em;
       }
 
       table,
@@ -69,8 +80,9 @@
     <table class="summary">
       <tbody>
         <tr>
-          <td>Quantité réelle<br><br><br></td>
-          <td>Balance No.<br><br><br></td>
+          <td>Quantité théorique<p class="total-quantity">{{this.totalQuantity}}</p></td>
+          <td>Quantité réelle</td>
+          <td>Balance No.</td>
         </tr>
       </tbody>
     </table>
