@@ -17,12 +17,14 @@ exports.handler = function (argv) {
 };
 
 async function print(order) {
-  const elementLabelFile = path.resolve(path.join(__dirname, "../../../resources/element.label"));
+  const lotFirstLabelFile = path.resolve(
+    path.join(__dirname, "../../../resources/lot-first.label")
+  );
   const lotLabelFile = path.resolve(path.join(__dirname, "../../../resources/lot.label"));
 
   const labelConfig = {
     dymo: new Dymo(),
-    elementLabelXml: fs.readFileSync(elementLabelFile, "utf8"),
+    lotFirstLabelXml: fs.readFileSync(lotFirstLabelFile, "utf8"),
     lotLabelXml: fs.readFileSync(lotLabelFile, "utf8"),
   };
 
@@ -37,14 +39,15 @@ function processElement(index, elements, labelConfig) {
     return;
   }
   element = elements[index];
-  var answer = readlineSync.keyIn(`Print element ${element.id} (y/n/q)? `, { limit: "$<ynq>" });
+  count = element.lots.length;
+  var answer = readlineSync.keyIn(`Print element ${element.id} - ${count} labels (y/n/q)? `, {
+    limit: "$<ynq>",
+  });
   switch (answer) {
     case "y":
-      printElement(element, labelConfig).then((result) => {
-        printLot(element, labelConfig).then((result) => {
-          console.log("%d lots printed.", element.lots.length);
-          processElement(++index, elements, labelConfig);
-        });
+      printElementLots(element, labelConfig).then((result) => {
+        console.log("%d lots printed.", element.lots.length);
+        processElement(++index, elements, labelConfig);
       });
       break;
     case "n":
@@ -55,32 +58,29 @@ function processElement(index, elements, labelConfig) {
   }
 }
 
-function printElement(element, labelConfig) {
-  const labelParts = [];
+function printElementLots(element, labelConfig) {
+  var firstLot = element.lots[0];
+  var otherLots = element.lots.slice(1);
 
-  labelParts.push("<LabelSet>");
-  recordXml = buildRecordXml(element, lot);
-  labelParts.push(recordXml);
-  labelParts.push("</LabelSet>");
-
-  let labelSetXml = labelParts.join("");
-
-  return printLabels(labelConfig.dymo, labelConfig.elementLabelXml, labelSetXml);
+  return printLots([firstLot], labelConfig.dymo, labelConfig.lotFirstLabelXml).then((result) => {
+    return printLots(otherLots, labelConfig.dymo, labelConfig.lotLabelXml);
+  });
 }
 
-function printLot(element, labelConfig) {
+function printLots(lots, dymo, labelXml) {
   const labelParts = [];
 
   labelParts.push("<LabelSet>");
-  for (var lot of element.lots) {
+  for (var lot of lots) {
     recordXml = buildRecordXml(element, lot);
     labelParts.push(recordXml);
   }
   labelParts.push("</LabelSet>");
 
   let labelSetXml = labelParts.join("");
+  console.log(labelXml);
 
-  return printLabels(labelConfig.dymo, labelConfig.lotLabelXml, labelSetXml);
+  return printLabels(dymo, labelXml, labelSetXml);
 }
 
 function buildRecordXml(element, lot) {
@@ -98,13 +98,16 @@ function buildRecordXml(element, lot) {
 }
 
 function printLabels(dymo, labelXml, labelSetXml) {
-  return dymo
-    .print("DYMO LabelWriter 450", labelXml, labelSetXml)
-    .then((result) => {
-      true;
-    })
-    .catch((err) => {
-      console.log(err);
-      throw err;
-    });
+  return (
+    dymo
+      // .print("DYMO LabelWriter 450 rPi @ pi-top", labelXml, labelSetXml)
+      .print("DYMO LabelWriter 450", labelXml, labelSetXml)
+      .then((result) => {
+        true;
+      })
+      .catch((err) => {
+        console.log(err);
+        throw err;
+      })
+  );
 }

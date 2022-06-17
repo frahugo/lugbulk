@@ -56,7 +56,7 @@
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="331.9115" Y="57.59995" Width="2845.854" Height="366.4919"/>
+    <Bounds X="331.2" Y="57.59995" Width="2845.854" Height="366.4919"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
@@ -82,7 +82,7 @@
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="334.7932" Y="940.3157" Width="3170.635" Height="300.62"/>
+    <Bounds X="572.5967" Y="937.7014" Width="2988.977" Height="300.62"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
@@ -108,7 +108,7 @@
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="331.2" Y="806.9026" Width="1590.472" Height="199.1905"/>
+    <Bounds X="569.0035" Y="804.2883" Width="1590.472" Height="199.1905"/>
   </ObjectInfo>
   <ObjectInfo>
     <ShapeObject>
@@ -150,7 +150,7 @@
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="331.2" Y="1243.268" Width="3092.65" Height="199.1905"/>
+    <Bounds X="569.0035" Y="1240.654" Width="2972.517" Height="199.1905"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
@@ -176,6 +176,22 @@
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="331.2" Y="435.9431" Width="2847.348" Height="199.1905"/>
+    <Bounds X="331.2" Y="430.7514" Width="2847.348" Height="199.1905"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <ShapeObject>
+      <Name>FORME_1</Name>
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <ShapeType>VerticalLine</ShapeType>
+      <LineWidth>140</LineWidth>
+      <LineAlignment>LeftOrTop</LineAlignment>
+      <FillColor Alpha="255" Red="0" Green="0" Blue="0"/>
+    </ShapeObject>
+    <Bounds X="331.2" Y="803.6317" Width="199.1905" Height="689.1683"/>
   </ObjectInfo>
 </DieCutLabel>
