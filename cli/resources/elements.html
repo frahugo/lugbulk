@@ -46,6 +46,10 @@
       th {
         font-weight: 700;
       }
+
+      .no-bold {
+        font-weight: normal;
+      }
     </style>
   </head>
   <body>
@@ -53,7 +57,10 @@
     <div style="float: right">
       <img src="https://rondotruck.com/parts/{{this.id}}.jpg" width="64px" height="64px" alt="">
     </div>
-    <h1>{{this.id}}</h1>
+    <h1>
+      {{this.id}}
+      <span class="no-bold">({{this.sequenceNumber}})</span>
+    </h1>
     <p>{{this.name}} :: <i>{{this.color}}</i></p>
 
     <table>

@@ -63,3 +63,9 @@ Handlebars.registerHelper("elementName", function (order, elementId) {
 Handlebars.registerHelper("elementColor", function (order, elementId) {
   return order.findElement(elementId).color;
 });
+
+Handlebars.registerHelper("elementIdentifier", function (order, elementId) {
+  const element = order.findElement(elementId);
+  const identifier = `${element.id} (${element.sequenceNumber})`;
+  return identifier;
+});

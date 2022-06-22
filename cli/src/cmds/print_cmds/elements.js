@@ -87,7 +87,7 @@ function buildRecordXml(element, lot) {
   var totalLots = pluralize("lot", element.lots.length, true);
 
   return `<LabelRecord>
-        <ObjectData Name="ELEMENT_ID">${element.id}</ObjectData>
+        <ObjectData Name="ELEMENT_ID">${element.id} (${element.sequenceNumber})</ObjectData>
         <ObjectData Name="ELEMENT_NAME">${element.name}</ObjectData>
         <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
         <ObjectData Name="PSEUDO">${lot.pseudo}</ObjectData>
@@ -100,8 +100,8 @@ function buildRecordXml(element, lot) {
 function printLabels(dymo, labelXml, labelSetXml) {
   return (
     dymo
-      // .print("DYMO LabelWriter 450 rPi @ pi-top", labelXml, labelSetXml)
-      .print("DYMO LabelWriter 450", labelXml, labelSetXml)
+      .print("DYMO LabelWriter 450 rPi @ pi-top", labelXml, labelSetXml)
+      // .print("DYMO LabelWriter 450", labelXml, labelSetXml)
       .then((result) => {
         true;
       })
