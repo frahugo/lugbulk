@@ -66,9 +66,13 @@ function printElementLots(element, labelConfig) {
   var firstLot = element.lots[0];
   var otherLots = element.lots.slice(1);
 
-  return printLots([firstLot], labelConfig.dymo, labelConfig.lotFirstLabelXml).then((result) => {
-    return printLots(otherLots, labelConfig.dymo, labelConfig.lotLabelXml);
-  });
+  if (otherLots.length > 0) {
+    return printLots([firstLot], labelConfig.dymo, labelConfig.lotFirstLabelXml).then((result) => {
+      return printLots(otherLots, labelConfig.dymo, labelConfig.lotLabelXml);
+    });
+  } else {
+    return printLots([firstLot], labelConfig.dymo, labelConfig.lotFirstLabelXml);
+  }
 }
 
 function printLots(lots, dymo, labelXml) {
@@ -82,7 +86,6 @@ function printLots(lots, dymo, labelXml) {
   labelParts.push("</LabelSet>");
 
   let labelSetXml = labelParts.join("");
-  console.log(labelXml);
 
   return printLabels(dymo, labelXml, labelSetXml);
 }
@@ -104,8 +107,8 @@ function buildRecordXml(element, lot) {
 function printLabels(dymo, labelXml, labelSetXml) {
   return (
     dymo
-      .print("DYMO LabelWriter 450 rPi @ pi-top", labelXml, labelSetXml)
-      // .print("DYMO LabelWriter 450", labelXml, labelSetXml)
+      // .print("DYMO LabelWriter 450 rPi @ pi-top", labelXml, labelSetXml)
+      .print("DYMO LabelWriter 450", labelXml, labelSetXml)
       .then((result) => {
         true;
       })
