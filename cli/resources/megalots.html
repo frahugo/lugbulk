@@ -15,32 +15,53 @@
         padding-bottom: 0;
       }
 
-      table {
+      .divTable {
+        display: table;
         width: 100%;
-        border-collapse: collapse;
       }
 
-      table,
-      th,
-      td {
-        border: 1px solid black;
+      .divHead {
+        display: table-header-group;
+        width: 100%;
       }
 
-      th, td {
-        padding: 0.10em 1em;
-        text-align: left;
-        font-size: 0.5em;
-        height: 16px;
+      .divBody {
+        display: table-row-group;
+        width: 100%;
       }
 
-      tr {
+      .divRow {
+        display: table-row;
+        width: 100%;
+      }
+
+      .divRow:nth-child(even) {
+        background-color: #DDD;
+      }
+
+      .divCell {
+        display: table-cell;
+        width: auto;
+        font-size: 0.6rem;
+        /* padding: 2px 0 2px 0; */
         page-break-inside: avoid;
         page-break-after: auto;
+        line-height: 2em;
       }
 
-      th {
+      .divHead .divCell {
         font-weight: 700;
+        border-top: 1px solid #999;
+        border-bottom: 1px solid #999;
       }
+
+
+      .divRow .divCell:nth-child(1) {width: 10%}
+      .divRow .divCell:nth-child(2) {width: 15%}
+      .divRow .divCell:nth-child(3) {width: 35%}
+      .divRow .divCell:nth-child(4) {width: 25%}
+      .divRow .divCell:nth-child(5) {width: 15%}
+
     </style>
   </head>
   <body>
@@ -48,28 +69,28 @@
     <h1>{{this.pseudo}}</h1>
     <p>{{this.firstName}} {{this.lastName}}</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>No. Lot</th>
-          <th>Element</th>
-          <th>Nom</th>
-          <th>Couleur</th>
-          <th>Quantité</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="divTable">
+      <div class="divHead">
+        <div class="divRow">
+          <div class="divCell">No. Lot</div>
+          <div class="divCell">Element</div>
+          <div class="divCell">Nom</div>
+          <div class="divCell">Couleur</div>
+          <div class="divCell">Quantité</div>
+        </div>
+      </div>
+      <div class="divBody">
         {{#each this.lots}}
-        <tr>
-          <td>{{this.sequence}}</td>
-          <td>{{elementIdentifier ../../order this.elementId}}</td>
-          <td>{{elementName ../../order this.elementId}}</td>
-          <td>{{elementColor ../../order this.elementId}}</td>
-          <td>{{this.quantity}}</td>
-        </tr>
+        <div class="divRow">
+          <div class="divCell">{{this.sequence}}</div>
+          <div class="divCell">{{elementIdentifier ../../order this.elementId}}</div>
+          <div class="divCell">{{elementName ../../order this.elementId}}</div>
+          <div class="divCell">{{elementColor ../../order this.elementId}}</div>
+          <div class="divCell">{{this.quantity}}</div>
+        </div>
         {{/each}}
-      </tbody>
-    </table>
+      </div>
+    </div>
 
     <div style="page-break-after: always"></div>
     {{/each}}
