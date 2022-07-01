@@ -3,6 +3,7 @@ const path = require("path");
 const pdf = require("pdf-creator-node");
 const pluralize = require("pluralize");
 const Handlebars = require("handlebars");
+const QRCode = require("qrcode");
 
 const { Element } = require("lugbulk-lib/src/element");
 const { Order } = require("lugbulk-lib/src/order");
@@ -39,21 +40,53 @@ async function print(order, output) {
     },
   };
 
-  var document = {
-    html: html,
-    data: { order: order },
-    path: output,
-    type: "",
-  };
+  generateQrCodes(order.elements).then((qrcodes) => {
+    var document = {
+      html: html,
+      data: { order: order, qrcodes: qrcodes },
+      path: output,
+      type: "",
+    };
 
-  pdf
-    .create(document, options)
-    .then((res) => {
-      console.log("PDF file generated: %s", res.filename);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    pdf
+      .create(document, options)
+      .then((res) => {
+        console.log("PDF file generated: %s", res.filename);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+}
+
+function generateQrCodes(remainingELements, acc = {}) {
+  if (remainingELements.length === 0) {
+    return acc;
+  } else {
+    var element = remainingELements[0];
+    var others = remainingELements.slice(1);
+
+    let quantities = element.lots.map((lot) => lot.quantity).join(",");
+    let qrcodeData = {
+      id: element.id,
+      name: element.name,
+      total: element.totalQuantity,
+      lots: quantities,
+    };
+    let qrcodeDataJson = JSON.stringify(qrcodeData);
+
+    // Get the base64 url
+    return QRCode.toDataURL(qrcodeDataJson, { margin: 0 })
+      .then((url) => {
+        acc[element.id] = url;
+        return generateQrCodes(others, acc);
+      })
+      .catch((err) => {
+        console.log(err);
+        acc[element.id] = "error occurred";
+        return acc;
+      });
+  }
 }
 
 Handlebars.registerHelper("firstName", function (order, pseudo) {
@@ -62,4 +95,8 @@ Handlebars.registerHelper("firstName", function (order, pseudo) {
 
 Handlebars.registerHelper("lastName", function (order, pseudo) {
   return order.findBuyer(pseudo).lastName;
+});
+
+Handlebars.registerHelper("qrcode", function (element, qrcodes) {
+  return qrcodes[element.id];
 });
