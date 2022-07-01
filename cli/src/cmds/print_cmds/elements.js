@@ -28,7 +28,11 @@ async function print(order) {
     lotLabelXml: fs.readFileSync(lotLabelFile, "utf8"),
   };
 
+  let totalCount = order.elements
+    .map((elem) => elem.lots.length)
+    .reduce((acc, count) => acc + count);
   console.log("%d elements to print.", order.elements.length);
+  console.log("%d labels to print.", totalCount);
 
   // Note: need recursion so the promises to work sequentially with the prompts.
   processElement(0, order.elements, labelConfig);
