@@ -82,6 +82,6 @@ buyers and quantities (the order sheet, not the nominations sheet).
 
 - First, open the Excel sheet and click on the tab at the bottom to make the order sheet active.
 - Then make sure that the first row has LUG member IDs that are included in the bulk. Clear all the other
-cells on that row.
+cells on that row (look at the end of the row, mauybe some left-overs from previous LB).
 - Then select "File > Save As" and select the CSV UTF-8 format. Excel will complain that the format
 does not support multiple sheets and that it will export the active sheet: click on OK.

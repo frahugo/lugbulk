@@ -1,1 +1,3 @@
 node_modules
+cli/*.pdf
+cli/*.csv
