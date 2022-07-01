@@ -10,8 +10,12 @@
         font-weight: 400;
       }
 
+      h1 {
+        clear: both;
+      }
+
       div.col1 {
-        width: 60%;
+        width: 65%;
       }
 
       div.col2 {
@@ -55,11 +59,11 @@
       .divCell {
         display: table-cell;
         width: auto;
-        font-size: 0.9rem;
+        font-size: 1.0rem;
         /* padding: 2px 0 2px 0; */
         page-break-inside: avoid;
         page-break-after: auto;
-        line-height: 1.5em;
+        line-height: 1.4em;
       }
 
       .divHead .divCell {
@@ -115,6 +119,10 @@
         float: right;
       }
 
+      p.lotsCount {
+        font-size: 1.6em;
+      }
+
       .no-bold {
         font-weight: normal;
       }
@@ -128,6 +136,16 @@
           <img src="https://rondotruck.com/parts/{{this.id}}.jpg" width="64px" height="64px" alt="">
         </div>
 
+        <h1>
+          {{this.id}}
+          <span class="no-bold">({{this.sequenceNumber}})</span>
+        </h1>
+        <p>
+          {{this.name}}
+          <br>
+          <b>{{this.color}}</b>
+        </p>
+
         <table class="summary">
           <tbody>
             <tr>
@@ -138,15 +156,11 @@
           </tbody>
         </table>
 
+        <p class="lotsCount">{{this.lots.length}} lots</p>
+
         <img class="qrcode" src="{{qrcode this ../qrcodes}}"></img>
       </div>
       <div class="col1">
-        <h1>
-          {{this.id}}
-          <span class="no-bold">({{this.sequenceNumber}})</span>
-        </h1>
-        <p>{{this.name}} :: <i>{{this.color}}</i></p>
-
         <div class="divTable">
           <div class="divHead">
             <div class="divRow">
