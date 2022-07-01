@@ -5,10 +5,74 @@
 
     <style>
       html {
-        font-size: 12px;
+        font-size: 10px;
         font-family: 'Ubuntu' !important;
         font-weight: 400;
       }
+
+      div.col1 {
+        width: 60%;
+      }
+
+      div.col2 {
+        width: 30%;
+        float: right;
+      }
+
+      div.container {
+        clear: both;
+      }
+
+      div.image {
+        float: right;
+        padding-bottom: 20px;
+      }
+
+      .divTable {
+        display: table;
+        width: 100%;
+      }
+
+      .divHead {
+        display: table-header-group;
+        width: 100%;
+      }
+
+      .divBody {
+        display: table-row-group;
+        width: 100%;
+      }
+
+      .divRow {
+        display: table-row;
+        width: 100%;
+      }
+
+      .divRow:nth-child(even) {
+        background-color: #DDD;
+      }
+
+      .divCell {
+        display: table-cell;
+        width: auto;
+        font-size: 0.9rem;
+        /* padding: 2px 0 2px 0; */
+        page-break-inside: avoid;
+        page-break-after: auto;
+        line-height: 1.5em;
+      }
+
+      .divHead .divCell {
+        font-weight: 700;
+        border-top: 1px solid #999;
+        border-bottom: 1px solid #999;
+      }
+
+
+      .divRow .divCell:nth-child(1) {width: 25%}
+      .divRow .divCell:nth-child(2) {width: 25%}
+      .divRow .divCell:nth-child(3) {width: 35%}
+      .divRow .divCell:nth-child(4) {width: 15%}
 
       table {
         width: 100%;
@@ -16,8 +80,6 @@
       }
 
       table.summary {
-        margin-top: 30px;
-        width: 45%;
         table-layout: fixed;
       }
       table.summary td {
@@ -40,7 +102,7 @@
       th, td {
         padding: 0.25em 1em;
         text-align: left;
-        font-size: 0.8em;
+        font-size: 0.5em;
       }
 
       th {
@@ -54,45 +116,52 @@
   </head>
   <body>
     {{#each order.elements}}
-    <div style="float: right">
-      <img src="https://rondotruck.com/parts/{{this.id}}.jpg" width="64px" height="64px" alt="">
+    <div class="container">
+      <div class="col2">
+        <div class="image">
+          <img src="https://rondotruck.com/parts/{{this.id}}.jpg" width="64px" height="64px" alt="">
+        </div>
+
+        <table class="summary">
+          <tbody>
+            <tr>
+              <td>Quantité théorique<p class="total-quantity">{{this.totalQuantity}}</p></td>
+              <td>Quantité réelle</td>
+              <td>Balance No.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col1">
+        <h1>
+          {{this.id}}
+          <span class="no-bold">({{this.sequenceNumber}})</span>
+        </h1>
+        <p>{{this.name}} :: <i>{{this.color}}</i></p>
+
+
+        <div class="divTable">
+          <div class="divHead">
+            <div class="divRow">
+              <div class="divCell">Prénom</div>
+              <div class="divCell">Nom</div>
+              <div class="divCell">Pseudo</div>
+              <div class="divCell">Quantité</div>
+            </div>
+          </div>
+          <div class="divBody">
+            {{#each this.lots}}
+            <div class="divRow">
+              <div class="divCell">{{firstName ../../order this.pseudo}}</div>
+              <div class="divCell">{{lastName ../../order this.pseudo}}</div>
+              <div class="divCell">{{this.pseudo}}</div>
+              <div class="divCell">{{this.quantity}}</div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
     </div>
-    <h1>
-      {{this.id}}
-      <span class="no-bold">({{this.sequenceNumber}})</span>
-    </h1>
-    <p>{{this.name}} :: <i>{{this.color}}</i></p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Prénom</th>
-          <th>Nom</th>
-          <th>Pseudo</th>
-          <th>Quantité</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each this.lots}}
-        <tr>
-          <td>{{firstName ../../order this.pseudo}}</td>
-          <td>{{lastName ../../order this.pseudo}}</td>
-          <td>{{this.pseudo}}</td>
-          <td>{{this.quantity}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-
-    <table class="summary">
-      <tbody>
-        <tr>
-          <td>Quantité théorique<p class="total-quantity">{{this.totalQuantity}}</p></td>
-          <td>Quantité réelle</td>
-          <td>Balance No.</td>
-        </tr>
-      </tbody>
-    </table>
 
     <div style="page-break-after: always"></div>
     {{/each}}
