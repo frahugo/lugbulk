@@ -10,6 +10,7 @@
   "author": "Hugo Frappier",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.21",
     "papaparse": "^5.3.1"
   },
   "devDependencies": {
