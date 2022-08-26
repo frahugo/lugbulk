@@ -74,6 +74,14 @@ To run the tests and watch for changes:
     cd lib
     npm run test
 
+
+For the web app:
+
+    cd app
+    npm start
+    npm run build
+    http-serve build
+
 QUELug instructions
 ---
 
