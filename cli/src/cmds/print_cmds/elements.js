@@ -35,27 +35,43 @@ async function print(order) {
   console.log("%d labels to print.", totalCount);
 
   // Note: need recursion so the promises to work sequentially with the prompts.
-  processElement(0, order.elements, labelConfig);
+  processElement(0, order.elements, labelConfig, 0);
 }
 
-function processElement(index, elements, labelConfig) {
+function processElement(index, elements, labelConfig, runningCount) {
   if (index + 1 > elements.length) {
     return;
   }
   element = elements[index];
   count = element.lots.length;
-  var answer = readlineSync.keyIn(`Print element ${element.id} - ${count} labels (y/n/q)? `, {
-    limit: "$<ynq>",
-  });
+  var answer = readlineSync.keyIn(
+    `Print element ${element.id} - ${count} labels, ${runningCount} so far (y/n, [q]uit [r]eset [g]oto)? `,
+    {
+      limit: "$<ynqrg>",
+    }
+  );
   switch (answer) {
     case "y":
       printElementLots(element, labelConfig).then((result) => {
         console.log("%d lots printed.", element.lots.length);
-        processElement(++index, elements, labelConfig);
+        processElement(++index, elements, labelConfig, runningCount + count);
       });
       break;
     case "n":
-      processElement(++index, elements, labelConfig);
+      processElement(++index, elements, labelConfig, runningCount);
+      break;
+    case "r":
+      processElement(++index, elements, labelConfig, 0);
+      break;
+    case "g":
+      var elementId = readlineSync.question("Element ID: ");
+      var elementIndex = elements.findIndex((element) => element.id == elementId);
+      if (elementIndex == -1) {
+        console.log("Element not found.");
+        processElement(index, elements, labelConfig, runningCount);
+      } else {
+        processElement(elementIndex, elements, labelConfig, runningCount);
+      }
       break;
     case "q":
       break;
