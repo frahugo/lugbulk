@@ -10,7 +10,7 @@
         font-weight: 400;
       }
 
-      h1 {
+      h1, p {
         margin-bottom: 0;
         padding-bottom: 0;
       }
@@ -42,11 +42,11 @@
       .divCell {
         display: table-cell;
         width: auto;
-        font-size: 0.6rem;
+        font-size: 0.5rem;
         /* padding: 2px 0 2px 0; */
         page-break-inside: avoid;
         page-break-after: auto;
-        line-height: 2em;
+        line-height: 1.7em;
       }
 
       .divHead .divCell {
@@ -66,7 +66,7 @@
   </head>
   <body>
     {{#each order.buyers}}
-    <h1>{{this.pseudo}}</h1>
+    <h1>{{this.pseudo}} ({{this.memberId}})</h1>
     <p>{{this.firstName}} {{this.lastName}}</p>
 
     <div class="divTable">

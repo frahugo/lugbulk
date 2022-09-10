@@ -97,6 +97,11 @@ Handlebars.registerHelper("lastName", function (order, pseudo) {
   return order.findBuyer(pseudo).lastName;
 });
 
+Handlebars.registerHelper("pseudoAndId", function (order, pseudo) {
+  let buyer = order.findBuyer(pseudo);
+  return `${buyer.pseudo} (${buyer.memberId})`;
+});
+
 Handlebars.registerHelper("qrcode", function (element, qrcodes) {
   return qrcodes[element.id];
 });
