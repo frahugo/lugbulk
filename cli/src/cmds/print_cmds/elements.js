@@ -61,7 +61,7 @@ function processElement(index, order, labelConfig, runningCount) {
       processElement(++index, order, labelConfig, runningCount);
       break;
     case "r":
-      processElement(++index, order, labelConfig, 0);
+      processElement(index, order, labelConfig, 0);
       break;
     case "g":
       var elementId = readlineSync.question("Element ID: ");

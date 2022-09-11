@@ -73,10 +73,11 @@
       }
 
 
-      .divRow .divCell:nth-child(1) {width: 25%}
+      .divRow .divCell:nth-child(1) {width: 5%}
       .divRow .divCell:nth-child(2) {width: 25%}
-      .divRow .divCell:nth-child(3) {width: 35%}
-      .divRow .divCell:nth-child(4) {width: 15%}
+      .divRow .divCell:nth-child(3) {width: 25%}
+      .divRow .divCell:nth-child(4) {width: 30%}
+      .divRow .divCell:nth-child(5) {width: 15%}
 
       table {
         width: 100%;
@@ -164,6 +165,7 @@
         <div class="divTable">
           <div class="divHead">
             <div class="divRow">
+              <div class="divCell">ID</div>
               <div class="divCell">Prénom</div>
               <div class="divCell">Nom</div>
               <div class="divCell">Pseudo</div>
@@ -173,9 +175,10 @@
           <div class="divBody">
             {{#each this.lots}}
             <div class="divRow">
+              <div class="divCell">{{id ../../order this.pseudo}}</div>
               <div class="divCell">{{firstName ../../order this.pseudo}}</div>
               <div class="divCell">{{lastName ../../order this.pseudo}}</div>
-              <div class="divCell">{{pseudoAndId ../../order this.pseudo}}</div>
+              <div class="divCell">{{this.pseudo}}</div>
               <div class="divCell">{{this.quantity}}</div>
             </div>
             {{/each}}
