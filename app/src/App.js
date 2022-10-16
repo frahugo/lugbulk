@@ -36,7 +36,7 @@ function Lots(props) {
 
 function DiscrepancyForm(props) {
   return (
-    <Form className="mb-3 mt-3">
+    <Form className="mb-3 mt-3" onSubmit={(e) => e.preventDefault()}>
       <Row>
         <Col>
           <Form.Control placeholder="Discrepancy" onChange={props.onSubmit} />
@@ -53,27 +53,36 @@ class ScanData extends React.Component {
     this.state = {
       data: props.data,
       adjustments: [],
+      reelCount: props.data.total,
     };
   }
 
   distributeDiscrepancy(e) {
-    console.log(this.state.data.lots);
-    console.log(e.target.value);
+    // console.log(this.state.data.lots);
+    // console.log(e.target.value);
     let adjustment = new Adjustment(this.state.data.lots);
     let discrepancy = parseInt(e.target.value);
+
     if (isNaN(discrepancy)) {
       discrepancy = 0;
     }
+
+    let theoricalCount = parseInt(this.state.data.total);
+    let reelCount = theoricalCount + discrepancy;
+
     adjustment.distribute(discrepancy);
-    console.log(adjustment.summaries);
-    this.setState({ adjustments: adjustment.summaries });
+    // console.log(adjustment.summaries);
+    this.setState({ adjustments: adjustment.summaries, reelCount: reelCount });
   }
 
   render() {
     return (
       <div className="mt-4">
         <h2>{this.state.data.name}</h2>
-        <p>Total pieces: {this.state.data.total}</p>
+        <h5>
+          Theorical count:&nbsp;<b>{this.state.data.total}</b>&nbsp;• Reel count:&nbsp;
+          <b>{this.state.reelCount}</b>
+        </h5>
         <DiscrepancyForm onSubmit={(e) => this.distributeDiscrepancy(e)} />
         <Lots list={this.state.adjustments} />
       </div>
@@ -90,6 +99,7 @@ class Qrcode extends React.Component {
       scanData: {},
     };
 
+    // Uncomment to test without having to scan a QR code
     // this.state = {
     //   showScanner: false,
     //   scanDone: true,
@@ -105,7 +115,7 @@ class Qrcode extends React.Component {
   }
 
   onNewScanResult(decodedText, decodedResult) {
-    console.log("Qrcode [result]", decodedResult);
+    // console.log("Qrcode [result]", decodedResult);
 
     // let decodedResult = this.state.decodedResult;
     // decodedResult.push(decodedResult);
@@ -121,7 +131,7 @@ class Qrcode extends React.Component {
       lots: data.lots.split(","),
     };
 
-    console.log(scanData);
+    // console.log(scanData);
 
     this.setState({
       showScanner: false,
