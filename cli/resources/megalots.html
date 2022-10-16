@@ -35,9 +35,9 @@
         width: 100%;
       }
 
-      .divRow:nth-child(even) {
+      /* .divRow:nth-child(even) {
         background-color: #DDD;
-      }
+      } */
 
       .divCell {
         display: table-cell;
@@ -47,6 +47,7 @@
         page-break-inside: avoid;
         page-break-after: auto;
         line-height: 1.7em;
+        border-bottom: 1px dotted #999;
       }
 
       .divHead .divCell {
@@ -57,10 +58,11 @@
 
 
       .divRow .divCell:nth-child(1) {width: 10%}
-      .divRow .divCell:nth-child(2) {width: 15%}
-      .divRow .divCell:nth-child(3) {width: 35%}
-      .divRow .divCell:nth-child(4) {width: 25%}
-      .divRow .divCell:nth-child(5) {width: 15%}
+      .divRow .divCell:nth-child(2) {width: 5%}
+      .divRow .divCell:nth-child(3) {width: 15%}
+      .divRow .divCell:nth-child(4) {width: 30%}
+      .divRow .divCell:nth-child(5) {width: 25%}
+      .divRow .divCell:nth-child(6) {width: 15%}
 
     </style>
   </head>
@@ -73,6 +75,7 @@
       <div class="divHead">
         <div class="divRow">
           <div class="divCell">No. Lot</div>
+          <div class="divCell">Verif</div>
           <div class="divCell">Element</div>
           <div class="divCell">Nom</div>
           <div class="divCell">Couleur</div>
@@ -83,6 +86,7 @@
         {{#each this.lots}}
         <div class="divRow">
           <div class="divCell">{{this.sequence}}</div>
+          <div class="divCell">&#x2610;</div>
           <div class="divCell">{{elementIdentifier ../../order this.elementId}}</div>
           <div class="divCell">{{elementName ../../order this.elementId}}</div>
           <div class="divCell">{{elementColor ../../order this.elementId}}</div>
