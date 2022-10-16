@@ -80,8 +80,9 @@ class ScanData extends React.Component {
       <div className="mt-4">
         <h2>{this.state.data.name}</h2>
         <h5>
-          Theorical count:&nbsp;<b>{this.state.data.total}</b>&nbsp;• Reel count:&nbsp;
-          <b>{this.state.reelCount}</b>
+          Theorical count:&nbsp;{this.state.data.total}
+          <br />
+          Reel count:&nbsp;<b>{this.state.reelCount}</b>
         </h5>
         <DiscrepancyForm onSubmit={(e) => this.distributeDiscrepancy(e)} />
         <Lots list={this.state.adjustments} />
