@@ -72,8 +72,7 @@ Development
 To run the tests and watch for changes:
 
     cd lib
-    npm run test
-
+    npm run test -- --watch
 
 For the web app:
 
