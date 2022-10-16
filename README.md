@@ -79,7 +79,7 @@ For the web app:
     cd app
     npm start
     npm run build
-    http-serve build
+    http-server build
 
 QUELug instructions
 ---
