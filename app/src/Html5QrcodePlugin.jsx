@@ -39,6 +39,7 @@ class Html5QrcodePlugin extends React.Component {
             config.experimentalFeatures = {useBarCodeDetectorIfSupported:!0};
             // config.rememberLastUsedCamera = !0;
             config.aspectRatio = 1.7777778;
+            config.facingMode = "environment";
             return config;
         }
 
