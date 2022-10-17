@@ -4,6 +4,8 @@ import { Adjustment } from "lugbulk-lib/src/adjustment";
 import React from "react";
 import { Button, Form, Row, Col, Container, Table } from "react-bootstrap";
 import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
+import Html5QrcodePluginMobile from "./Html5QrcodePluginMobile.jsx";
+import { isMobile } from "react-device-detect";
 
 import "./App.css";
 
@@ -53,7 +55,7 @@ class ScanData extends React.Component {
     this.state = {
       data: props.data,
       adjustments: [],
-      reelCount: props.data.total,
+      realCount: props.data.total,
     };
   }
 
@@ -68,11 +70,11 @@ class ScanData extends React.Component {
     }
 
     let theoricalCount = parseInt(this.state.data.total);
-    let reelCount = theoricalCount + discrepancy;
+    let realCount = theoricalCount + discrepancy;
 
     adjustment.distribute(discrepancy);
     // console.log(adjustment.summaries);
-    this.setState({ adjustments: adjustment.summaries, reelCount: reelCount });
+    this.setState({ adjustments: adjustment.summaries, realCount: realCount });
   }
 
   render() {
@@ -82,7 +84,7 @@ class ScanData extends React.Component {
         <h5>
           Theorical count:&nbsp;{this.state.data.total}
           <br />
-          Reel count:&nbsp;<b>{this.state.reelCount}</b>
+          Real count:&nbsp;<b>{this.state.realCount}</b>
         </h5>
         <DiscrepancyForm onSubmit={(e) => this.distributeDiscrepancy(e)} />
         <Lots list={this.state.adjustments} />
@@ -145,18 +147,6 @@ class Qrcode extends React.Component {
     console.warn(`Code scan error = ${error}`);
   }
 
-  qrcodeScanner() {
-    return (
-      <Html5QrcodePlugin
-        fps={10}
-        qrbox={250}
-        disableFlip={false}
-        qrCodeSuccessCallback={(test, result) => this.onNewScanResult(test, result)}
-        qrCodeErrorCallback={(error) => this.onNewScanError(error)}
-      />
-    );
-  }
-
   startQrcodeScanner() {
     this.setState({ showScanner: true, scanDone: false });
   }
@@ -176,24 +166,45 @@ class Qrcode extends React.Component {
     }
 
     if (this.state.showScanner) {
-      scanner = (
-        <div>
-          <Button
-            variant="outline-primary"
-            className="mb-2"
-            onClick={() => this.stopQrcodeScanner()}
-          >
-            Stop Scanning
-          </Button>
-          <Html5QrcodePlugin
-            fps={1}
-            qrbox={250}
-            disableFlip={false}
-            qrCodeSuccessCallback={(test, result) => this.onNewScanResult(test, result)}
-            qrCodeErrorCallback={(error) => this.onNewScanError(error)}
-          />
-        </div>
-      );
+      if (isMobile) {
+        scanner = (
+          <div>
+            <Button
+              variant="outline-primary"
+              className="mb-2"
+              onClick={() => this.stopQrcodeScanner()}
+            >
+              Stop Scanning
+            </Button>
+            <Html5QrcodePluginMobile
+              fps={1}
+              qrbox={250}
+              disableFlip={false}
+              qrCodeSuccessCallback={(test, result) => this.onNewScanResult(test, result)}
+              qrCodeErrorCallback={(error) => this.onNewScanError(error)}
+            />
+          </div>
+        );
+      } else {
+        scanner = (
+          <div>
+            <Button
+              variant="outline-primary"
+              className="mb-2"
+              onClick={() => this.stopQrcodeScanner()}
+            >
+              Stop Scanning
+            </Button>
+            <Html5QrcodePlugin
+              fps={1}
+              qrbox={250}
+              disableFlip={false}
+              qrCodeSuccessCallback={(test, result) => this.onNewScanResult(test, result)}
+              qrCodeErrorCallback={(error) => this.onNewScanError(error)}
+            />
+          </div>
+        );
+      }
     } else {
       scanner = (
         <Button variant="outline-primary" onClick={() => this.startQrcodeScanner()}>

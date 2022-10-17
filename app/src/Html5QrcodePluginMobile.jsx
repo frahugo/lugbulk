@@ -1,9 +1,9 @@
-import { Html5QrcodeScanner } from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
 import React from 'react';
 
 const qrcodeRegionId = "html5qr-code-full-region";
 
-class Html5QrcodePlugin extends React.Component {
+class Html5QrcodePluginMobile extends React.Component {
   render() {
     return (
       <div id={qrcodeRegionId} />
@@ -14,7 +14,7 @@ class Html5QrcodePlugin extends React.Component {
     // TODO(mebjas): See if there is a better way to handle
     //  promise in `componentWillUnmount`.
     // console.log("Unmounting...");
-    this.html5QrcodeScanner.clear().catch(error => {
+    this.html5QrCode.stop().catch(error => {
       console.error("Failed to clear html5QrcodeScanner. ", error);
     });
   }
@@ -39,24 +39,17 @@ class Html5QrcodePlugin extends React.Component {
       config.experimentalFeatures = { useBarCodeDetectorIfSupported: !0 };
       // config.rememberLastUsedCamera = !0;
       config.aspectRatio = 1.7777778;
+      config.facingMode = "environment";
       config.supportedScanTypes = [0];
       return config;
     }
 
     var config = createConfig(this.props);
-    var verbose = this.props.verbose === true;
 
-    // Suceess callback is required.
-    // if (!(this.props.qrCodeSuccessCallback )) {
-    //     throw "qrCodeSuccessCallback is required callback.";
-    // }
+    this.html5QrCode = new Html5Qrcode(qrcodeRegionId);
 
-    this.html5QrcodeScanner = new Html5QrcodeScanner(
-      qrcodeRegionId, config, verbose);
-    this.html5QrcodeScanner.render(
-      this.props.qrCodeSuccessCallback,
-      this.props.qrCodeErrorCallback);
+    this.html5QrCode.start({ facingMode: "environment" }, config, this.props.qrCodeSuccessCallback);
   }
 };
 
-export default Html5QrcodePlugin;
+export default Html5QrcodePluginMobile;
