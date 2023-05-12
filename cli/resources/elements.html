@@ -114,10 +114,15 @@
         font-weight: 700;
       }
 
-      img.qrcode {
-        margin-top: 20px;
+      div.qrcode-container {
         width: 128px;
+        margin-top: 20px;
         float: right;
+        text-align: center;
+      }
+
+      img.qrcode {
+        width: 128px;
       }
 
       p.lotsCount {
@@ -159,7 +164,10 @@
 
         <p class="lotsCount">{{this.lots.length}} lots</p>
 
-        <img class="qrcode" src="{{qrcode this ../qrcodes}}"></img>
+        <div class="qrcode-container">
+          <img class="qrcode" src="{{qrcode this ../qrcodes}}"></img>
+          <span>www.lugbulkcalc.info</span>
+        </div>
       </div>
       <div class="col1">
         <div class="divTable">
