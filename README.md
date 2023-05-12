@@ -46,21 +46,27 @@ Open a terminal window and `cd` to the repository, in the `cli` sub-folder.
 
 To list the elements:
 
-    bin/lugbulk -i path-to-csv list elements
+    bin/lugbulk list elements path-to-order-csv
 
 To list the buyers:
 
-    bin/lugbulk -i path-to-csv list lots
+    bin/lugbulk list lots path-to-order-csv
 
 The out of the above commands can also be sent to a CSV file by appending the option `-o csv-file-name`.
 
 To print test labels:
 
-    bin/lugbulk -i path-to-csv print test
+    bin/lugbulk -i path-to-order-csv print test
 
 To print the labels for the lots:
 
-    bin/lugbulk -i path-to-csv print elements
+    bin/lugbulk -i path-to-order-csv print elements
+
+To create the PDF files:
+
+    bin/lugbulk pdf elements path-to-order-csv
+    bin/lugbulk pdf megalots path-to-order-csv
+    bin/lugbulk buyers megalots path-to-order-csv path-to-members-csv
 
 To show help:
 
@@ -87,8 +93,12 @@ QUELug instructions
 For a project support or LUG bulk order, first, you need to export sheet with the right
 buyers and quantities (the order sheet, not the nominations sheet).
 
-- First, open the Excel sheet and click on the tab at the bottom to make the order sheet active.
-- Then make sure that the first row has LUG member IDs that are included in the bulk. Clear all the other
-cells on that row (look at the end of the row, mauybe some left-overs from previous LB).
-- Then select "File > Save As" and select the CSV UTF-8 format. Excel will complain that the format
-does not support multiple sheets and that it will export the active sheet: click on OK.
+- First, go in the Google Sheet and download as CSV the two sheets (replace X with appropriate number):
+    - Commande: rename to lb202X-orig.csv
+    - MembresCommande: rename to lb202X-membres.csv
+- Open lb202X-orig.csv in LibreOffice or other software:
+    - Make sure that the first row has LUG member IDs that are included in the bulk.
+    - Review the buyers columns and remove the non-participating buyers.
+    - Go at the bottom and look at the total pieces per buyer. If a buyer has 0 as the total, delete the column.
+    - Then save the file as CSV format to lb202X.csv
+- Follow instruction above to generate the PDF files and labels.
