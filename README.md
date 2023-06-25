@@ -52,15 +52,21 @@ To list the buyers:
 
     bin/lugbulk list lots path-to-order-csv
 
-The out of the above commands can also be sent to a CSV file by appending the option `-o csv-file-name`.
+The `list` commands can send output to a CSV file by appending `-o csv-file-name` to the command.
+
+### Labels
+
+The name of the label printer is hardcoded in the source code to `DYMO LabelWriter 450`. To change it, edit [this file](https://github.com/frahugo/lugbulk/blob/master/cli/src/cmds/print_cmds/elements.js#L133).
 
 To print test labels:
 
-    bin/lugbulk -i path-to-order-csv print test
+    bin/lugbulk print test path-to-order-csv
 
 To print the labels for the lots:
 
-    bin/lugbulk -i path-to-order-csv print elements
+    bin/lugbulk print elements path-to-order-csv
+
+### PDF Files
 
 To create the PDF files:
 
