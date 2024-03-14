@@ -23,8 +23,10 @@ async function print(order) {
   };
 
   element = order.elements[0];
+  lot = element.lots[0];
+  buyer = order.findBuyer(lot.pseudo);
 
-  printLot(element, labelConfig).then((result) => {
+  printLot(element, lot, buyer, labelConfig).then((result) => {
     console.log("1 label should have been printed.");
   });
 }
@@ -42,11 +44,11 @@ function printElement(element, labelConfig) {
   return printLabels(labelConfig.dymo, labelConfig.elementLabelXml, labelSetXml);
 }
 
-function printLot(element, labelConfig) {
+function printLot(element, lot, buyer, labelConfig) {
   const labelParts = [];
 
   labelParts.push("<LabelSet>");
-  recordXml = buildRecordXml(element, element.lots[0]);
+  recordXml = buildRecordXml(element, lot, buyer);
   labelParts.push(recordXml);
   labelParts.push("</LabelSet>");
 
@@ -55,7 +57,7 @@ function printLot(element, labelConfig) {
   return printLabels(labelConfig.dymo, labelConfig.lotLabelXml, labelSetXml);
 }
 
-function buildRecordXml(element, lot) {
+function buildRecordXml(element, lot, buyer) {
   var totalLots = 10;
   var sequenceNumber = 100;
 

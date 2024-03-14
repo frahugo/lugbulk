@@ -23,7 +23,7 @@ exports.handler = function (argv) {
         chalk.yellow.bold(element.id),
         element.name,
         chalk.green.green(element.color),
-        buyer.pseudo,
+        `${buyer.pseudo} (${buyer.memberId})`,
         lot.quantity,
         lot.sequence,
         buyer.firstName,
