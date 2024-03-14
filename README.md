@@ -33,6 +33,8 @@ cd ../cli
 npm install
 ```
 
+Note: if you have to modify the label templates (XML files), make sure you do not have a plugin that reformats the file on save. In VS code, run command `Save without formatting`.
+
 Assumptions
 -----
 

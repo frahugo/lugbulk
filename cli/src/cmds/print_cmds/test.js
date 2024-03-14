@@ -15,21 +15,17 @@ exports.handler = function (argv) {
 };
 
 async function print(order) {
-  const elementLabelFile = path.resolve(path.join(__dirname, "../../../resources/element.label"));
-  const lotLabelFile = path.resolve(path.join(__dirname, "../../../resources/lot.label"));
+  const lotLabelFile = path.resolve(path.join(__dirname, "../../../resources/lot-first.label"));
 
   const labelConfig = {
     dymo: new Dymo(),
-    elementLabelXml: fs.readFileSync(elementLabelFile, "utf8"),
     lotLabelXml: fs.readFileSync(lotLabelFile, "utf8"),
   };
 
   element = order.elements[0];
 
-  printElement(element, labelConfig).then((result) => {
-    printLot(element, labelConfig).then((result) => {
-      console.log("2 labels should have been printed.");
-    });
+  printLot(element, labelConfig).then((result) => {
+    console.log("1 label should have been printed.");
   });
 }
 
@@ -60,14 +56,17 @@ function printLot(element, labelConfig) {
 }
 
 function buildRecordXml(element, lot) {
+  var totalLots = 10;
+  var sequenceNumber = 100;
+
   return `<LabelRecord>
-        <ObjectData Name="ELEMENT_ID">${element.id}</ObjectData>
+        <ObjectData Name="ELEMENT_ID">${element.id} (${sequenceNumber})</ObjectData>
         <ObjectData Name="ELEMENT_NAME">${element.name}</ObjectData>
         <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
-        <ObjectData Name="PSEUDO">${lot.pseudo}</ObjectData>
+        <ObjectData Name="PSEUDO">${lot.pseudo} (${buyer.memberId})</ObjectData>
         <ObjectData Name="SEQUENCE">${lot.sequence}</ObjectData>
         <ObjectData Name="QUANTITY">${lot.quantity}</ObjectData>
-        <ObjectData Name="TOTAL">1 lot</ObjectData>
+        <ObjectData Name="TOTAL">${totalLots}</ObjectData>
     </LabelRecord>`;
 }
 
