@@ -40,23 +40,31 @@ async function print(order, output) {
     },
   };
 
-  generateQrCodes(order.elements).then((qrcodes) => {
-    var document = {
-      html: html,
-      data: { order: order, qrcodes: qrcodes },
-      path: output,
-      type: "",
-    };
+  var appQrCode;
 
-    pdf
-      .create(document, options)
-      .then((res) => {
-        console.log("PDF file generated: %s", res.filename);
-      })
-      .catch((error) => {
-        console.error(error);
+  generateAppQrCode()
+    .then((dataUrl) => {
+      appQrCode = dataUrl;
+    })
+    .then(() => {
+      generateQrCodes(order.elements).then((qrcodes) => {
+        var document = {
+          html: html,
+          data: { order: order, qrcodes: qrcodes, appQrcode: appQrCode },
+          path: output,
+          type: "",
+        };
+
+        pdf
+          .create(document, options)
+          .then((res) => {
+            console.log("PDF file generated: %s", res.filename);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       });
-  });
+    });
 }
 
 function generateQrCodes(remainingELements, acc = {}) {
@@ -87,6 +95,20 @@ function generateQrCodes(remainingELements, acc = {}) {
         return acc;
       });
   }
+}
+
+function generateAppQrCode() {
+  let text = "https://www.lugbulkcalc.info/";
+
+  // Get the base64 url
+  return QRCode.toDataURL(text, { margin: 0 })
+    .then((url) => {
+      return url;
+    })
+    .catch((err) => {
+      console.log(err);
+      return "error occurred";
+    });
 }
 
 Handlebars.registerHelper("firstName", function (order, pseudo) {

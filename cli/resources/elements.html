@@ -125,6 +125,21 @@
         width: 128px;
       }
 
+      div.app-qrcode-container {
+        width: 128px;
+        margin-top: 260px;
+        float: right;
+        text-align: right;
+      }
+
+      img.app-qrcode {
+        width: 32px;
+      }
+
+      div.app-qrcode-container span {
+        font-size: 0.5em;
+      }
+
       p.lotsCount {
         font-size: 1.6em;
       }
@@ -166,7 +181,11 @@
 
         <div class="qrcode-container">
           <img class="qrcode" src="{{qrcode this ../qrcodes}}"></img>
-          <span>www.lugbulkcalc.info</span>
+        </div>
+
+        <div class="app-qrcode-container">
+          <span>lugbulkcalc.info</span>
+          <img class="app-qrcode" src="{{../appQrcode}}"></img>
         </div>
       </div>
       <div class="col1">
