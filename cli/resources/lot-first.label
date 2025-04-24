@@ -34,32 +34,6 @@
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
-      <Name>PSEUDO</Name>
-      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
-      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
-      <LinkedObjectName></LinkedObjectName>
-      <Rotation>Rotation0</Rotation>
-      <IsMirrored>False</IsMirrored>
-      <IsVariable>False</IsVariable>
-      <HorizontalAlignment>Left</HorizontalAlignment>
-      <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>ShrinkToFit</TextFitMode>
-      <UseFullFontHeight>True</UseFullFontHeight>
-      <Verticalized>False</Verticalized>
-      <StyledText>
-        <Element>
-          <String>hugofrappier</String>
-          <Attributes>
-            <Font Family="Helvetica" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
-            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
-          </Attributes>
-        </Element>
-      </StyledText>
-    </TextObject>
-    <Bounds X="331.2" Y="57.59995" Width="2845.854" Height="366.4919"/>
-  </ObjectInfo>
-  <ObjectInfo>
-    <TextObject>
       <Name>ELEMENT_NAME</Name>
       <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
       <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
@@ -111,22 +85,6 @@
     <Bounds X="569.0035" Y="804.2883" Width="1790.472" Height="199.1905"/>
   </ObjectInfo>
   <ObjectInfo>
-    <ShapeObject>
-      <Name>FORME</Name>
-      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
-      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
-      <LinkedObjectName></LinkedObjectName>
-      <Rotation>Rotation0</Rotation>
-      <IsMirrored>False</IsMirrored>
-      <IsVariable>False</IsVariable>
-      <ShapeType>Rectangle</ShapeType>
-      <LineWidth>20</LineWidth>
-      <LineAlignment>LeftOrTop</LineAlignment>
-      <FillColor Alpha="0" Red="0" Green="0" Blue="0"/>
-    </ShapeObject>
-    <Bounds X="3641.804" Y="881.684" Width="1227.82" Height="537.0646"/>
-  </ObjectInfo>
-  <ObjectInfo>
     <TextObject>
       <Name>ELEMENT_COLOR</Name>
       <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
@@ -153,32 +111,6 @@
     <Bounds X="569.0035" Y="1240.654" Width="2972.517" Height="199.1905"/>
   </ObjectInfo>
   <ObjectInfo>
-    <TextObject>
-      <Name>SEQUENCE</Name>
-      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
-      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
-      <LinkedObjectName></LinkedObjectName>
-      <Rotation>Rotation0</Rotation>
-      <IsMirrored>False</IsMirrored>
-      <IsVariable>False</IsVariable>
-      <HorizontalAlignment>Left</HorizontalAlignment>
-      <VerticalAlignment>Middle</VerticalAlignment>
-      <TextFitMode>None</TextFitMode>
-      <UseFullFontHeight>True</UseFullFontHeight>
-      <Verticalized>False</Verticalized>
-      <StyledText>
-        <Element>
-          <String>5 / 36</String>
-          <Attributes>
-            <Font Family="Helvetica" Size="11" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
-            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
-          </Attributes>
-        </Element>
-      </StyledText>
-    </TextObject>
-    <Bounds X="331.2" Y="430.7514" Width="2847.348" Height="199.1905"/>
-  </ObjectInfo>
-  <ObjectInfo>
     <ShapeObject>
       <Name>FORME_1</Name>
       <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
@@ -193,5 +125,125 @@
       <FillColor Alpha="255" Red="0" Green="0" Blue="0"/>
     </ShapeObject>
     <Bounds X="331.2" Y="803.6317" Width="199.1905" Height="689.1683"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
+      <Name>MEMBER_ID</Name>
+      <ForeColor Alpha="255" Red="108" Green="108" Blue="108"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Top</VerticalAlignment>
+      <TextFitMode>AlwaysFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>26</String>
+          <Attributes>
+            <Font Family="Courier New" Size="24" Bold="True" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="108" Green="108" Blue="108"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="331.2" Y="48.00003" Width="1022.264" Height="919.1589"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
+      <Name>YEAR</Name>
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Right</HorizontalAlignment>
+      <VerticalAlignment>Bottom</VerticalAlignment>
+      <TextFitMode>None</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>2025</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="4326.881" Y="318.3954" Width="560" Height="560"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <ShapeObject>
+      <Name>FORME</Name>
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <ShapeType>Rectangle</ShapeType>
+      <LineWidth>20</LineWidth>
+      <LineAlignment>LeftOrTop</LineAlignment>
+      <FillColor Alpha="0" Red="0" Green="0" Blue="0"/>
+    </ShapeObject>
+    <Bounds X="3644.977" Y="872.0687" Width="1227.82" Height="560"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
+      <Name>PSEUDO_1</Name>
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Top</VerticalAlignment>
+      <TextFitMode>ShrinkToFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>faudet</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="1328.749" Y="371.4175" Width="1941.272" Height="366.4919"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
+      <Name>SEQUENCE</Name>
+      <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Top</VerticalAlignment>
+      <TextFitMode>ShrinkToFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>lot #1</String>
+          <Attributes>
+            <Font Family="Helvetica" Size="10" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="1335.272" Y="140.0894" Width="1941.272" Height="366.4919"/>
   </ObjectInfo>
 </DieCutLabel>

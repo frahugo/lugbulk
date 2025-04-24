@@ -112,17 +112,20 @@ function printLots(lots, order, dymo, labelXml) {
 
 function buildRecordXml(element, lot, order) {
   var totalLots = pluralize("lot", element.lots.length, true);
-
   var buyer = order.findBuyer(lot.pseudo);
+  var now = new Date();
+  var year = now.getFullYear();
 
   return `<LabelRecord>
-        <ObjectData Name="ELEMENT_ID">${element.id} (${element.sequenceNumber})</ObjectData>
+        <ObjectData Name="ELEMENT_ID">${element.id} (${sequenceNumber})</ObjectData>
         <ObjectData Name="ELEMENT_NAME">${element.name}</ObjectData>
         <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
-        <ObjectData Name="PSEUDO">${lot.pseudo} (${buyer.memberId})</ObjectData>
+        <ObjectData Name="PSEUDO">${lot.pseudo}</ObjectData>
+        <ObjectData Name="MEMBER_ID">${buyer.memberId}</ObjectData>
         <ObjectData Name="SEQUENCE">${lot.sequence}</ObjectData>
         <ObjectData Name="QUANTITY">${lot.quantity}</ObjectData>
         <ObjectData Name="TOTAL">${totalLots}</ObjectData>
+        <ObjectData Name="YEAR">${year}</ObjectData>
     </LabelRecord>`;
 }
 

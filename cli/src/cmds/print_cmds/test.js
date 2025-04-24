@@ -60,15 +60,19 @@ function printLot(element, lot, buyer, labelConfig) {
 function buildRecordXml(element, lot, buyer) {
   var totalLots = 10;
   var sequenceNumber = 100;
+  var now = new Date();
+  var year = now.getFullYear();
 
   return `<LabelRecord>
         <ObjectData Name="ELEMENT_ID">${element.id} (${sequenceNumber})</ObjectData>
         <ObjectData Name="ELEMENT_NAME">${element.name}</ObjectData>
         <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
-        <ObjectData Name="PSEUDO">${lot.pseudo} (${buyer.memberId})</ObjectData>
+        <ObjectData Name="PSEUDO">${lot.pseudo}</ObjectData>
+        <ObjectData Name="MEMBER_ID">${buyer.memberId}</ObjectData>
         <ObjectData Name="SEQUENCE">${lot.sequence}</ObjectData>
         <ObjectData Name="QUANTITY">${lot.quantity}</ObjectData>
         <ObjectData Name="TOTAL">${totalLots}</ObjectData>
+        <ObjectData Name="YEAR">${year}</ObjectData>
     </LabelRecord>`;
 }
 
