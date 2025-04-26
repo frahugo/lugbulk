@@ -3,7 +3,7 @@ lugbulk
 
 Tools for helping with the task of sorting parts from a LUG bulk.
 
-![label example](/doc/example.jpg)
+![label example](/doc/example2.jpg)
 
 ![command line demo](/doc/command-line-demo.gif)
 
