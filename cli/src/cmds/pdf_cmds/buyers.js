@@ -76,3 +76,11 @@ Handlebars.registerHelper("if_multiple_of_three", function (conditional, count, 
     return options.inverse(this);
   }
 });
+
+Handlebars.registerHelper("if_extras", function (element, options) {
+  if (element.extraQuantity > 0) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});

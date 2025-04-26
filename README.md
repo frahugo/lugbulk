@@ -109,4 +109,5 @@ buyers and quantities (the order sheet, not the nominations sheet).
     - Review the buyers columns and remove the non-participating buyers.
     - Go at the bottom and look at the total pieces per buyer. If a buyer has 0 as the total, delete the column.
     - Then save the file as CSV format to lb202X.csv
+    - Remove bottow rows (subtotals, totals, ...)
 - Follow instruction above to generate the PDF files and labels.

@@ -111,8 +111,8 @@ function generateAppQrCode() {
     });
 }
 
-Handlebars.registerHelper("firstName", function (order, pseudo) {
-  return order.findBuyer(pseudo).firstName;
+Handlebars.registerHelper("fullName", function (order, pseudo) {
+  return order.findBuyer(pseudo).fullName;
 });
 
 Handlebars.registerHelper("lastName", function (order, pseudo) {

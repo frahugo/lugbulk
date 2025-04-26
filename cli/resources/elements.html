@@ -28,7 +28,7 @@
       }
 
       div.image {
-        float: right;
+        float: left;
         padding-bottom: 20px;
       }
 
@@ -74,10 +74,9 @@
 
 
       .divRow .divCell:nth-child(1) {width: 5%}
-      .divRow .divCell:nth-child(2) {width: 25%}
-      .divRow .divCell:nth-child(3) {width: 25%}
-      .divRow .divCell:nth-child(4) {width: 30%}
-      .divRow .divCell:nth-child(5) {width: 15%}
+      .divRow .divCell:nth-child(2) {width: 50%}
+      .divRow .divCell:nth-child(3) {width: 30%}
+      .divRow .divCell:nth-child(4) {width: 15%}
 
       table {
         width: 100%;
@@ -95,7 +94,7 @@
       table.summary p.total-quantity {
         margin: 0;
         padding-top: 5px;
-        font-size: 2.5em;
+        font-size: 2.4em;
       }
 
       table,
@@ -114,20 +113,28 @@
         font-weight: 700;
       }
 
+      td.no-fill {
+        background-color: #EEE;
+      }
+
       div.qrcode-container {
-        width: 128px;
+        width: 160px;
         margin-top: 20px;
-        float: right;
+        float: left;
         text-align: center;
       }
 
       img.qrcode {
-        width: 128px;
+        width: 160px;
+      }
+
+      p.instructions {
+        font-size: 0.7em;
       }
 
       div.app-qrcode-container {
         width: 128px;
-        margin-top: 260px;
+        margin-top: 60px;
         float: right;
         text-align: right;
       }
@@ -141,7 +148,28 @@
       }
 
       p.lotsCount {
-        font-size: 1.6em;
+        font-size: 3em;
+      }
+
+      td.checkboxes {
+        padding-top: 5px;
+      }
+
+      td.checkboxes div {
+        display: inline-block;
+        font-size: 1.8em;
+        vertical-align: middle;
+        margin: auto;
+      }
+
+      td.checkboxes input[type="checkbox"] {
+        position: relative;
+        vertical-align: middle;
+      }
+
+      div.arrow {
+        float: right;
+        padding-top: 10px;
       }
 
       .no-bold {
@@ -170,17 +198,52 @@
         <table class="summary">
           <tbody>
             <tr>
-              <td>Quantité théorique<p class="total-quantity">{{this.totalQuantity}}</p></td>
-              <td>Quantité réelle</td>
+              <td class="no-fill">Quantité prévue<p class="total-quantity">{{this.totalQuantity}}</p></td>
+              <td>Table No.</td>
               <td>Balance No.</td>
+            </tr>
+            <tr>
+              <td class="checkboxes" colspan="2">
+                <div class="arrow">
+                  &#11157;
+                </div>
+                <div>
+                  <input type="checkbox" name="cbSurplus" />
+                  <label for="cbSurplus">Surplus</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="cbDeficit" />
+                  <label for="cbDeficit">Déficit</label>
+                </div>
+              </td>
+              <td>Quantité</td>
             </tr>
           </tbody>
         </table>
 
-        <p class="lotsCount">{{this.lots.length}} lots</p>
+        {{#if_extras this}}
+          <p class="lotsCount">{{this.lots.length}} lots ++</p>
+        {{else}}
+          <p class="lotsCount">{{this.lots.length}} lots</p>
+        {{/if_extras}}
+
+        {{#if_extras this}}
+          <table class="summary">
+            <tbody>
+              <tr>
+                <td class="no-fill">Extra prévu<br/>&nbsp;<p class="total-quantity">{{this.extraQuantity}}</p></td>
+                <td class="no-fill">% quantité totale<br/>&nbsp;<p class="total-quantity">{{this.extraPercentage}}%</p></td>
+              </tr>
+            </tbody>
+          </table>
+        {{else}}
+          Aucun extra prévu.
+        {{/if_extras}}
+
 
         <div class="qrcode-container">
           <img class="qrcode" src="{{qrcode this ../qrcodes}}"></img>
+          <p class="instructions">En cas de déficit, scanner le code QR ci-dessus avec le calculateur pour déterminer une répartition juste. Scanner le code QR ci-bas pour accéder au calculateur.</p>
         </div>
 
         <div class="app-qrcode-container">
@@ -193,8 +256,7 @@
           <div class="divHead">
             <div class="divRow">
               <div class="divCell">ID</div>
-              <div class="divCell">Prénom</div>
-              <div class="divCell">Nom</div>
+              <div class="divCell">Membre</div>
               <div class="divCell">Pseudo</div>
               <div class="divCell">Quantité</div>
             </div>
@@ -203,8 +265,7 @@
             {{#each this.lots}}
             <div class="divRow">
               <div class="divCell">{{id ../../order this.pseudo}}</div>
-              <div class="divCell">{{firstName ../../order this.pseudo}}</div>
-              <div class="divCell">{{lastName ../../order this.pseudo}}</div>
+              <div class="divCell">{{fullName ../../order this.pseudo}}</div>
               <div class="divCell">{{this.pseudo}}</div>
               <div class="divCell">{{this.quantity}}</div>
             </div>

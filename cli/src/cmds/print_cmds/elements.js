@@ -45,7 +45,7 @@ function processElement(index, order, labelConfig, runningCount) {
   element = order.elements[index];
   count = element.lots.length;
   var answer = readlineSync.keyIn(
-    `Print element ${element.id} - ${count} labels, ${runningCount} so far (y/n, [q]uit [r]eset [g]oto)? `,
+    `Print element ${element.id} (${element.sequenceNumber}) - ${count} labels, ${runningCount} so far (y/n, [q]uit [r]eset [g]oto)? `,
     {
       limit: "$<ynqrg>",
     }
@@ -117,7 +117,7 @@ function buildRecordXml(element, lot, order) {
   var year = now.getFullYear();
 
   return `<LabelRecord>
-        <ObjectData Name="ELEMENT_ID">${element.id} (${sequenceNumber})</ObjectData>
+        <ObjectData Name="ELEMENT_ID">${element.id} (${element.sequenceNumber})</ObjectData>
         <ObjectData Name="ELEMENT_NAME">${element.name}</ObjectData>
         <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
         <ObjectData Name="PSEUDO">${lot.pseudo}</ObjectData>

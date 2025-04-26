@@ -26,8 +26,7 @@ exports.handler = function (argv) {
         `${buyer.pseudo} (${buyer.memberId})`,
         lot.quantity,
         lot.sequence,
-        buyer.firstName,
-        buyer.lastName,
+        buyer.fullName,
       ];
       table.push(line);
     }
@@ -47,8 +46,7 @@ exports.handler = function (argv) {
         buyer.pseudo,
         lot.quantity,
         lot.sequence,
-        buyer.firstName,
-        buyer.lastName,
+        buyer.fullName,
       ];
       table.push(line);
     }
