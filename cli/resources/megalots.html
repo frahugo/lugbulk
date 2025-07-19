@@ -1,18 +1,61 @@
 <!DOCTYPE >
 <html>
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
-      html {
+      html body {
         font-size: 12px;
         font-family: 'Ubuntu' !important;
         font-weight: 400;
+        margin: 10px 30px;
       }
 
       h1, p {
         margin-bottom: 0;
         padding-bottom: 0;
+      }
+
+      h1 {
+        padding-top: 20px;
+        line-height: 0.3em;
+      }
+
+      table.header {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0;
+      }
+
+      table.header td {
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table.header td.member {
+        width: 45%;
+        padding-top: 10px;
+        text-align: left;
+      }
+
+      table.header td.year {
+        width: 10%;
+        text-align: center;
+        padding-top: 20px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #b0b0b0;
+      }
+
+      table.header td.member-id {
+        width: 45%;
+        text-align: right;
+        /* font-family: 'Courier Prime', monospace !important; */
+        font-family: 'Courier New', monospace !important;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 5rem;
       }
 
       .divTable {
@@ -35,18 +78,13 @@
         width: 100%;
       }
 
-      /* .divRow:nth-child(even) {
-        background-color: #DDD;
-      } */
-
       .divCell {
         display: table-cell;
         width: auto;
-        font-size: 0.7rem;
-        /* padding: 2px 0 2px 0; */
+        font-size: 0.45rem;
         page-break-inside: avoid;
         page-break-after: auto;
-        line-height: 1.7em;
+        line-height: 1.2em;
         border-bottom: 1px dotted #999;
       }
 
@@ -58,45 +96,136 @@
 
 
       .divRow .divCell:nth-child(1) {width: 10%}
-      .divRow .divCell:nth-child(2) {width: 5%}
-      .divRow .divCell:nth-child(3) {width: 15%}
-      .divRow .divCell:nth-child(4) {width: 30%}
+      .divRow .divCell:nth-child(2) {width: 15%}
+      .divRow .divCell:nth-child(3) {width: 10%}
+      .divRow .divCell:nth-child(4) {width: 40%}
       .divRow .divCell:nth-child(5) {width: 25%}
-      .divRow .divCell:nth-child(6) {width: 15%}
 
+      table.matrix {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 1px;
+        margin-bottom: 0;
+      }
+
+      table.matrix tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+
+      table.matrix td {
+        width: 14.2%;
+        height: auto;
+        text-align: center;
+        padding: 2px 0 2px 0;
+        page-break-inside: avoid;
+        page-break-after: auto;
+        border: 1px solid #999;
+      }
+
+      div.details {
+        color: #b0b0b0;
+        display: table;
+        width: 100%;
+      }
+
+      div.sequence {
+        font-size: 2.2rem;
+        padding-top: 4px;
+        /* line-height: 0.9em; */
+      }
+
+      span.element {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: right;
+        font-size: 0.5rem;
+        padding-right: 4px;
+        color: black;
+      }
+
+      span.checkbox {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 1.0rem;
+        padding-right: 2px;
+        color: black;
+      }
     </style>
   </head>
   <body>
     {{#each order.buyers}}
-    <h1>{{this.pseudo}} ({{this.memberId}})</h1>
-    <p>{{this.fullName}}</p>
+      <table class="header">
+        <tbody>
+          <tr>
+            <td class="member">
+              <h1>{{this.pseudo}}</h1>
+              <p>{{this.fullName}}</p>
+            </td>
+            <td class="year">{{../year}}</td>
+            <td class="member-id"> {{this.memberId}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <div class="divTable">
-      <div class="divHead">
-        <div class="divRow">
-          <div class="divCell">No. Lot</div>
-          <div class="divCell">Verif</div>
-          <div class="divCell">Element</div>
-          <div class="divCell">Nom</div>
-          <div class="divCell">Couleur</div>
-          <div class="divCell">Quantité</div>
+      <table class="matrix">
+        <tbody>
+          {{#each (chunk this.lots 7)}}
+            <tr>
+              {{#each this}}
+                <td>
+                  <div class="sequence"> {{this.sequence}} </div>
+                  <div class="details">
+                    <span class="element">{{elementIdentifier ../../../order this.elementId}}</span>
+                    <span class="checkbox">&#x2610;</span>
+                  </div>
+                </td>
+              {{/each}}
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div style="page-break-after: always"></div>
+
+      <table class="header">
+        <tbody>
+          <tr>
+            <td class="member">
+              <h1>{{this.pseudo}}</h1>
+              <p>{{this.fullName}}</p>
+            </td>
+            <td class="year">{{../year}}</td>
+            <td class="member-id"> {{this.memberId}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="divTable">
+        <div class="divHead">
+          <div class="divRow">
+            <div class="divCell">No. Lot</div>
+            <div class="divCell">Element</div>
+            <div class="divCell">Quantité</div>
+            <div class="divCell">Nom</div>
+            <div class="divCell">Couleur</div>
+          </div>
+        </div>
+        <div class="divBody">
+          {{#each this.lots}}
+          <div class="divRow">
+            <div class="divCell">{{this.sequence}}</div>
+            <div class="divCell">{{elementIdentifier ../../order this.elementId}}</div>
+            <div class="divCell">{{this.quantity}}</div>
+            <div class="divCell">{{elementName ../../order this.elementId}}</div>
+            <div class="divCell">{{elementColor ../../order this.elementId}}</div>
+          </div>
+          {{/each}}
         </div>
       </div>
-      <div class="divBody">
-        {{#each this.lots}}
-        <div class="divRow">
-          <div class="divCell">{{this.sequence}}</div>
-          <div class="divCell">&#x2610;</div>
-          <div class="divCell">{{elementIdentifier ../../order this.elementId}}</div>
-          <div class="divCell">{{elementName ../../order this.elementId}}</div>
-          <div class="divCell">{{elementColor ../../order this.elementId}}</div>
-          <div class="divCell">{{this.quantity}}</div>
-        </div>
-        {{/each}}
-      </div>
-    </div>
 
-    <div style="page-break-after: always"></div>
+      <div style="page-break-after: always"></div>
+
     {{/each}}
   </body>
 </html>

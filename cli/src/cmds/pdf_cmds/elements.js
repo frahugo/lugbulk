@@ -98,7 +98,7 @@ function generateQrCodes(remainingELements, acc = {}) {
 }
 
 function generateAppQrCode() {
-  let text = "https://www.lugbulkcalc.info/";
+  let text = "https://lugbulkcalc.com/";
 
   // Get the base64 url
   return QRCode.toDataURL(text, { margin: 0 })
