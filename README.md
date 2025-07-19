@@ -80,6 +80,17 @@ To show help:
 
     bin/lugbulk
 
+### Missing lots
+
+If some elements were not received fast enough, you can print the missings lots per member.
+
+1. Create a CSV and put the element IDs, one per line.
+2. Run this command:
+
+    bin/lugbulk print missings path-to-order-csv path-to-missing-lots
+
+You can then attach each slip to the member's megalot sheet.
+
 Development
 ---
 

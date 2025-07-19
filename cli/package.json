@@ -15,6 +15,7 @@
     "chalk": "^4.1.2",
     "dymojs": "^1.2.0",
     "lugbulk-lib": "file:../lib",
+    "node-thermal-printer": "^4.5.0",
     "papaparse": "^5.3.1",
     "pdf-creator-node": "^2.2.4",
     "pluralize": "^8.0.0",

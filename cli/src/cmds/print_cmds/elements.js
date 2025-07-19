@@ -108,8 +108,6 @@ function printLots(lots, order, dymo, labelXml) {
   return printLabels(dymo, labelXml, labelSetXml);
 }
 
-// 4211075
-
 function buildRecordXml(element, lot, order) {
   var totalLots = pluralize("lot", element.lots.length, true);
   var buyer = order.findBuyer(lot.pseudo);
