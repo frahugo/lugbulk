@@ -119,7 +119,7 @@ function buildRecordXml(element, lot, order) {
         <ObjectData Name="ELEMENT_NAME">${element.name}</ObjectData>
         <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
         <ObjectData Name="PSEUDO">${lot.pseudo}</ObjectData>
-        <ObjectData Name="MEMBER_ID">${buyer.memberId}</ObjectData>
+        <ObjectData Name="MEMBER_ID">${buyer.zone}${buyer.memberId}</ObjectData>
         <ObjectData Name="SEQUENCE">lot #${lot.sequence}</ObjectData>
         <ObjectData Name="QUANTITY">${lot.quantity}</ObjectData>
         <ObjectData Name="TOTAL">${totalLots}</ObjectData>

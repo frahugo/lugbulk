@@ -128,32 +128,6 @@
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
-      <Name>MEMBER_ID</Name>
-      <ForeColor Alpha="255" Red="108" Green="108" Blue="108"/>
-      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
-      <LinkedObjectName></LinkedObjectName>
-      <Rotation>Rotation0</Rotation>
-      <IsMirrored>False</IsMirrored>
-      <IsVariable>False</IsVariable>
-      <HorizontalAlignment>Left</HorizontalAlignment>
-      <VerticalAlignment>Top</VerticalAlignment>
-      <TextFitMode>AlwaysFit</TextFitMode>
-      <UseFullFontHeight>True</UseFullFontHeight>
-      <Verticalized>False</Verticalized>
-      <StyledText>
-        <Element>
-          <String>26</String>
-          <Attributes>
-            <Font Family="Courier New" Size="24" Bold="True" Italic="False" Underline="False" Strikeout="False"/>
-            <ForeColor Alpha="255" Red="108" Green="108" Blue="108"/>
-          </Attributes>
-        </Element>
-      </StyledText>
-    </TextObject>
-    <Bounds X="331.2" Y="48.00003" Width="1022.264" Height="919.1589"/>
-  </ObjectInfo>
-  <ObjectInfo>
-    <TextObject>
       <Name>YEAR</Name>
       <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
       <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
@@ -180,6 +154,32 @@
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
+      <Name>MEMBER_ID</Name>
+      <ForeColor Alpha="255" Red="108" Green="108" Blue="108"/>
+      <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
+      <LinkedObjectName></LinkedObjectName>
+      <Rotation>Rotation0</Rotation>
+      <IsMirrored>False</IsMirrored>
+      <IsVariable>False</IsVariable>
+      <HorizontalAlignment>Left</HorizontalAlignment>
+      <VerticalAlignment>Top</VerticalAlignment>
+      <TextFitMode>AlwaysFit</TextFitMode>
+      <UseFullFontHeight>True</UseFullFontHeight>
+      <Verticalized>False</Verticalized>
+      <StyledText>
+        <Element>
+          <String>A26</String>
+          <Attributes>
+            <Font Family="Courier New" Size="36" Bold="True" Italic="False" Underline="False" Strikeout="False"/>
+            <ForeColor Alpha="255" Red="108" Green="108" Blue="108"/>
+          </Attributes>
+        </Element>
+      </StyledText>
+    </TextObject>
+    <Bounds X="331.2" Y="48.00003" Width="1540.799" Height="1005.174"/>
+  </ObjectInfo>
+  <ObjectInfo>
+    <TextObject>
       <Name>PSEUDO</Name>
       <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
       <BackColor Alpha="0" Red="255" Green="255" Blue="255"/>
@@ -196,13 +196,13 @@
         <Element>
           <String>faudet</String>
           <Attributes>
-            <Font Family="Helvetica" Size="13" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
+            <Font Family="Helvetica" Size="11" Bold="False" Italic="False" Underline="False" Strikeout="False"/>
             <ForeColor Alpha="255" Red="0" Green="0" Blue="0"/>
           </Attributes>
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="1328.749" Y="371.4176" Width="1941.272" Height="366.4919"/>
+    <Bounds X="1890.604" Y="371.4175" Width="1379.417" Height="366.4919"/>
   </ObjectInfo>
   <ObjectInfo>
     <TextObject>
@@ -228,6 +228,6 @@
         </Element>
       </StyledText>
     </TextObject>
-    <Bounds X="1335.702" Y="140.0894" Width="1941.272" Height="366.4919"/>
+    <Bounds X="1884.842" Y="140.0894" Width="1391.702" Height="366.4919"/>
   </ObjectInfo>
 </DieCutLabel>
