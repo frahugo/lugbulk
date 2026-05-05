@@ -121,7 +121,7 @@ Handlebars.registerHelper("lastName", function (order, pseudo) {
 
 Handlebars.registerHelper("id", function (order, pseudo) {
   let buyer = order.findBuyer(pseudo);
-  return `${buyer.memberId}`;
+  return `${buyer.zone}${buyer.memberId}`;
 });
 
 Handlebars.registerHelper("qrcode", function (element, qrcodes) {
