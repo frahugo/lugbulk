@@ -1,6 +1,5 @@
 // const { Adjustment } = require("lugbulk-lib/src/adjustment");
 import { Adjustment } from "lugbulk-lib/src/adjustment";
-
 import React from "react";
 import { Button, Form, Row, Col, Container, Table } from "react-bootstrap";
 import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
@@ -8,6 +7,8 @@ import Html5QrcodePluginMobile from "./Html5QrcodePluginMobile.jsx";
 import { isMobile } from "react-device-detect";
 
 import "./App.css";
+
+const APPS_SCRIPT_URL = process.env.REACT_APP_APPS_SCRIPT_URL;
 
 function Lot(props) {
   return (
@@ -41,9 +42,17 @@ function DiscrepancyForm(props) {
     <Form className="mb-3 mt-3" onSubmit={(e) => e.preventDefault()}>
       <Row>
         <Col>
-          <Form.Control placeholder="Discrepancy" onChange={props.onSubmit} />
+          <Form.Control
+            placeholder="Discrepancy"
+            value={props.discrepancy}
+            onChange={(e) => props.onChange(e.target.value)}
+          />
         </Col>
-        <Col />
+        <Col xs="auto">
+          <Button variant="primary" onClick={props.onCalculate}>
+            Calculate
+          </Button>
+        </Col>
       </Row>
     </Form>
   );
@@ -54,27 +63,40 @@ class ScanData extends React.Component {
     super(props);
     this.state = {
       data: props.data,
+      discrepancy: "",
       adjustments: [],
       realCount: props.data.total,
     };
   }
 
-  distributeDiscrepancy(e) {
-    // console.log(this.state.data.lots);
-    // console.log(e.target.value);
-    let adjustment = new Adjustment(this.state.data.lots);
-    let discrepancy = parseInt(e.target.value);
+  calculate() {
+    const adjustment = new Adjustment(this.state.data.lots);
+    let discrepancy = parseInt(this.state.discrepancy);
 
     if (isNaN(discrepancy)) {
       discrepancy = 0;
     }
 
-    let theoricalCount = parseInt(this.state.data.total);
-    let realCount = theoricalCount + discrepancy;
+    const theoricalCount = parseInt(this.state.data.total);
+    const realCount = theoricalCount + discrepancy;
 
     adjustment.distribute(discrepancy);
-    // console.log(adjustment.summaries);
-    this.setState({ adjustments: adjustment.summaries, realCount: realCount });
+    const adjustments = adjustment.summaries;
+
+    this.setState({ adjustments, realCount });
+
+    if (!APPS_SCRIPT_URL) return;
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify({
+        name: this.state.data.name,
+        theoretical: theoricalCount,
+        discrepancy,
+        realCount,
+        adjustments,
+      }),
+    }).catch((err) => console.error("Failed to record calculation:", err));
   }
 
   render() {
@@ -86,7 +108,11 @@ class ScanData extends React.Component {
           <br />
           Real count:&nbsp;<b>{this.state.realCount}</b>
         </h5>
-        <DiscrepancyForm onSubmit={(e) => this.distributeDiscrepancy(e)} />
+        <DiscrepancyForm
+          discrepancy={this.state.discrepancy}
+          onChange={(val) => this.setState({ discrepancy: val })}
+          onCalculate={() => this.calculate()}
+        />
         <Lots list={this.state.adjustments} />
       </div>
     );
