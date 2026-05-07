@@ -1,6 +1,6 @@
 // const { Adjustment } = require("lugbulk-lib/src/adjustment");
 import { Adjustment } from "lugbulk-lib/src/adjustment";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Row, Col, Container, Table } from "react-bootstrap";
 import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
 import Html5QrcodePluginMobile from "./Html5QrcodePluginMobile.jsx";
@@ -200,7 +200,7 @@ class Qrcode extends React.Component {
               className="mb-2"
               onClick={() => this.stopQrcodeScanner()}
             >
-              Stop Scanning
+              Arrêter le scan
             </Button>
             <Html5QrcodePluginMobile
               fps={1}
@@ -219,7 +219,7 @@ class Qrcode extends React.Component {
               className="mb-2"
               onClick={() => this.stopQrcodeScanner()}
             >
-              Stop Scanning
+              Arrêter le scan
             </Button>
             <Html5QrcodePlugin
               fps={1}
@@ -234,7 +234,7 @@ class Qrcode extends React.Component {
     } else {
       scanner = (
         <Button variant="outline-primary" onClick={() => this.startQrcodeScanner()}>
-          Scan QR Code
+          Scanner code QR
         </Button>
       );
     }
@@ -252,13 +252,129 @@ class Qrcode extends React.Component {
   }
 }
 
-const App = () => (
-  <Container>
-    <Container className="p-2 pt-3 mt-2 mb-4 bg-light rounded-3">
-      <h1 className="header">LUGBulk Calculator</h1>
-      <Qrcode />
+function Settings({ onClose }) {
+  const [name, setName] = useState(() => localStorage.getItem("name") || "");
+  const [tableNumber, setTableNumber] = useState(() => localStorage.getItem("tableNumber") || "");
+  const [balanceChoice, setBalanceChoice] = useState(() => localStorage.getItem("balanceChoice") || "Aucune");
+  const [balanceNumber, setBalanceNumber] = useState(() => localStorage.getItem("balanceNumber") || "");
+
+  function save() {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    localStorage.setItem("name", trimmed);
+    localStorage.setItem("tableNumber", tableNumber.trim());
+    localStorage.setItem("balanceChoice", balanceChoice);
+    localStorage.setItem("balanceNumber", balanceNumber.trim());
+    onClose(trimmed);
+  }
+
+  return (
+    <Container>
+      <Container className="p-2 pt-3 mt-2 mb-4 bg-light rounded-3">
+        <h1 className="header text-center">Paramètres</h1>
+        <Row className="justify-content-center">
+          <Col xs={12} md={6}>
+            <Form onSubmit={(e) => { e.preventDefault(); save(); }}>
+              <Form.Group className="mb-3">
+                <Form.Label>Nom</Form.Label>
+                <Form.Control
+                  placeholder="Entrez votre ou vos noms"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Numéro de table</Form.Label>
+                <Form.Control
+                  placeholder="Numéro"
+                  value={tableNumber}
+                  onChange={(e) => setTableNumber(e.target.value)}
+                  style={{ maxWidth: "8rem" }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Row className="align-items-start">
+                  <Col xs="auto">
+                    <Form.Label>Balance</Form.Label>
+                    {["Aucune", "Personelle", "QueLug"].map((option) => (
+                      <Form.Check
+                        key={option}
+                        type="radio"
+                        label={option}
+                        value={option}
+                        checked={balanceChoice === option}
+                        onChange={() => setBalanceChoice(option)}
+                      />
+                    ))}
+                  </Col>
+                  {balanceChoice === "QueLug" && (
+                    <Col xs="auto">
+                      <Form.Label>Numéro de balance</Form.Label>
+                      <Form.Control
+                        placeholder="Numéro"
+                        value={balanceNumber}
+                        onChange={(e) => setBalanceNumber(e.target.value)}
+                        style={{ maxWidth: "8rem" }}
+                      />
+                    </Col>
+                  )}
+                </Row>
+              </Form.Group>
+              <Button
+                variant="primary"
+                onClick={save}
+                disabled={
+                  !name.trim() ||
+                  !tableNumber.trim() ||
+                  !balanceChoice ||
+                  (balanceChoice === "QueLug" && !balanceNumber.trim())
+                }
+              >
+                Sauvegarder
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </Container>
-  </Container>
-);
+  );
+}
+
+const App = () => {
+  const [showSettings, setShowSettings] = useState(false);
+  const [userName, setUserName] = useState(() => localStorage.getItem("name") || "");
+
+  useEffect(() => {
+    if (!userName) setShowSettings(true);
+  }, []);
+
+  function handleSettingsClose(savedName) {
+    setUserName(savedName);
+    setShowSettings(false);
+  }
+
+  if (showSettings) {
+    return <Settings onClose={handleSettingsClose} />;
+  }
+
+  return (
+    <Container>
+      <Container className="p-2 pt-3 mt-2 mb-4 bg-light rounded-3">
+        <Row className="align-items-center mb-2 position-relative">
+          <Col className="text-center">
+            <h1 className="header">Calculateur LUGBulk</h1>
+          </Col>
+          <Col xs="auto" className="position-absolute end-0">
+            <Button variant="outline-secondary" size="sm" onClick={() => setShowSettings(true)}>
+              Paramètres
+            </Button>
+          </Col>
+        </Row>
+        <Qrcode />
+      </Container>
+    </Container>
+  );
+};
 
 export default App;
