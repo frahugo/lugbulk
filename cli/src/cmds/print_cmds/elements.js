@@ -82,15 +82,43 @@ function printElementLots(element, order, labelConfig) {
   var firstLot = element.lots[0];
   var otherLots = element.lots.slice(1);
 
+  const printExtra = () => {
+    if (element.extraQuantity > 0) {
+      return printExtraLot(element, labelConfig.dymo, labelConfig.lotLabelXml);
+    }
+    return Promise.resolve();
+  };
+
   if (otherLots.length > 0) {
-    return printLots([firstLot], order, labelConfig.dymo, labelConfig.lotFirstLabelXml).then(
-      (result) => {
-        return printLots(otherLots, order, labelConfig.dymo, labelConfig.lotLabelXml);
-      }
-    );
+    return printLots([firstLot], order, labelConfig.dymo, labelConfig.lotFirstLabelXml)
+      .then(() => printLots(otherLots, order, labelConfig.dymo, labelConfig.lotLabelXml))
+      .then(printExtra);
   } else {
-    return printLots([firstLot], order, labelConfig.dymo, labelConfig.lotFirstLabelXml);
+    return printLots([firstLot], order, labelConfig.dymo, labelConfig.lotFirstLabelXml).then(
+      printExtra
+    );
   }
+}
+
+function printExtraLot(element, dymo, labelXml) {
+  var now = new Date();
+  var year = now.getFullYear();
+  var totalLots = pluralize("lot", element.lots.length, true);
+
+  var recordXml = `<LabelRecord>
+        <ObjectData Name="ELEMENT_ID">${element.id} (${element.sequenceNumber})</ObjectData>
+        <ObjectData Name="ELEMENT_NAME">${element.name}</ObjectData>
+        <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
+        <ObjectData Name="PSEUDO"></ObjectData>
+        <ObjectData Name="MEMBER_ID">***</ObjectData>
+        <ObjectData Name="SEQUENCE">EXTRA</ObjectData>
+        <ObjectData Name="QUANTITY">${element.extraQuantity}</ObjectData>
+        <ObjectData Name="TOTAL">${totalLots}</ObjectData>
+        <ObjectData Name="YEAR">${year}</ObjectData>
+    </LabelRecord>`;
+
+  var labelSetXml = `<LabelSet>${recordXml}</LabelSet>`;
+  return printLabels(dymo, labelXml, labelSetXml);
 }
 
 function printLots(lots, order, dymo, labelXml) {
