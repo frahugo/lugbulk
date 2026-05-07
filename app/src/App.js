@@ -1,4 +1,3 @@
-// const { Adjustment } = require("lugbulk-lib/src/adjustment");
 import { Adjustment } from "lugbulk-lib/src/adjustment";
 import React, { useState } from "react";
 import { Button, Form, Row, Col, Container, Table } from "react-bootstrap";

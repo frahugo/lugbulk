@@ -119,7 +119,7 @@
 
       div.qrcode-container {
         width: 160px;
-        margin-top: 20px;
+        margin-top: 0px;
         float: left;
         text-align: center;
       }
@@ -195,55 +195,37 @@
           <b>{{this.color}}</b>
         </p>
 
-        <table class="summary">
-          <tbody>
-            <tr>
-              <td class="no-fill">Quantité prévue<p class="total-quantity">{{this.totalQuantity}}</p></td>
-              <td>Table No.</td>
-              <td>Balance No.</td>
-            </tr>
-            <tr>
-              <td class="checkboxes" colspan="2">
-                <div class="arrow">
-                  &#11157;
-                </div>
-                <div>
-                  <input type="checkbox" name="cbSurplus" />
-                  <label for="cbSurplus">Surplus</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="cbDeficit" />
-                  <label for="cbDeficit">Déficit</label>
-                </div>
-              </td>
-              <td>Quantité</td>
-            </tr>
-          </tbody>
-        </table>
-
-        {{#if_extras this}}
-          <p class="lotsCount">{{this.lots.length}} lots ++</p>
-        {{else}}
-          <p class="lotsCount">{{this.lots.length}} lots</p>
-        {{/if_extras}}
-
         {{#if_extras this}}
           <table class="summary">
             <tbody>
               <tr>
+                <td class="no-fill">Quantité prévue<p class="total-quantity">{{this.totalQuantity}}</p></td>
                 <td class="no-fill">Extra prévu<br/>&nbsp;<p class="total-quantity">{{this.extraQuantity}}</p></td>
-                <td class="no-fill">% quantité totale<br/>&nbsp;<p class="total-quantity">{{this.extraPercentage}}%</p></td>
+                <td class="no-fill">% quantité totale<br/><p class="total-quantity">{{this.extraPercentage}}%</p></td>
               </tr>
             </tbody>
           </table>
         {{else}}
-          Aucun extra prévu.
+          <table class="summary">
+            <tbody>
+              <tr>
+                <td class="no-fill">Quantité prévue<p class="total-quantity">{{this.totalQuantity}}</p></td>
+                <td class="no-fill">Extra prévu<br/>&nbsp;<p class="total-quantity">Aucun</p></td>
+                <td class="no-fill">% quantité totale<br/><p class="total-quantity"></p></td>
+              </tr>
+            </tbody>
+          </table>
         {{/if_extras}}
 
+        {{#if_extras this}}
+          <p class="lotsCount">{{this.lots.length}} lots + 1</p>
+        {{else}}
+          <p class="lotsCount">{{this.lots.length}} lots</p>
+        {{/if_extras}}
 
         <div class="qrcode-container">
           <img class="qrcode" src="{{qrcode this ../qrcodes}}"></img>
-          <p class="instructions">En cas de déficit, scanner le code QR ci-dessus avec le calculateur pour déterminer une répartition juste. Scanner le code QR ci-bas pour accéder au calculateur.</p>
+          <p class="instructions">Scanner le code QR ci-dessus avec le calculateur pour déterminer une répartition juste. Scanner le code QR ci-bas pour accéder au calculateur.</p>
         </div>
 
         <div class="app-qrcode-container">
@@ -270,6 +252,14 @@
               <div class="divCell">{{this.quantity}}</div>
             </div>
             {{/each}}
+            {{#if_extras this}}
+            <div class="divRow">
+              <div class="divCell">***</div>
+              <div class="divCell">Extra</div>
+              <div class="divCell"></div>
+              <div class="divCell">{{this.extraQuantity}}</div>
+            </div>
+            {{/if_extras}}
           </div>
         </div>
       </div>
