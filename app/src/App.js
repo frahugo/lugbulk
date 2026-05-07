@@ -41,16 +41,34 @@ function Lots(props) {
 function DiscrepancyForm(props) {
   return (
     <Form className="mb-3 mt-3" onSubmit={(e) => e.preventDefault()}>
-      <Row>
-        <Col>
+      <Row className="align-items-center">
+        <Col xs="auto">
+          <div className="d-flex gap-3">
+            {[{ value: "surplus", label: "Surplus" }, { value: "deficit", label: "Déficit" }].map(({ value, label }) => (
+              <Form.Check
+                key={value}
+                id={`direction-${value}`}
+                type="radio"
+                label={label}
+                checked={props.direction === value}
+                onChange={() => props.onDirectionChange(value)}
+              />
+            ))}
+          </div>
+        </Col>
+        <Col xs="auto">
           <Form.Control
-            placeholder="Différence"
-            value={props.discrepancy}
-            onChange={(e) => props.onChange(e.target.value)}
+            type="number"
+            min="0"
+            inputMode="numeric"
+            placeholder="Quantité"
+            value={props.quantity}
+            onChange={(e) => props.onQuantityChange(e.target.value)}
+            style={{ maxWidth: "8rem" }}
           />
         </Col>
         <Col xs="auto">
-          <Button variant="primary" onClick={props.onCalculate}>
+          <Button className="mt-3" variant="primary" onClick={props.onCalculate}>
             Calculer
           </Button>
         </Col>
@@ -64,7 +82,8 @@ class ScanData extends React.Component {
     super(props);
     this.state = {
       data: props.data,
-      discrepancy: "",
+      direction: "surplus",
+      quantity: "",
       adjustments: [],
       realCount: props.data.total,
     };
@@ -72,11 +91,8 @@ class ScanData extends React.Component {
 
   calculate() {
     const adjustment = new Adjustment(this.state.data.lots);
-    let discrepancy = parseInt(this.state.discrepancy);
-
-    if (isNaN(discrepancy)) {
-      discrepancy = 0;
-    }
+    const qty = parseInt(this.state.quantity) || 0;
+    const discrepancy = this.state.direction === "surplus" ? qty : -qty;
 
     const theoricalCount = parseInt(this.state.data.total);
     const realCount = theoricalCount + discrepancy;
@@ -110,8 +126,10 @@ class ScanData extends React.Component {
           Quantité réelle:&nbsp;<b>{this.state.realCount}</b>
         </h5>
         <DiscrepancyForm
-          discrepancy={this.state.discrepancy}
-          onChange={(val) => this.setState({ discrepancy: val })}
+          direction={this.state.direction}
+          quantity={this.state.quantity}
+          onDirectionChange={(val) => this.setState({ direction: val })}
+          onQuantityChange={(val) => this.setState({ quantity: val })}
           onCalculate={() => this.calculate()}
         />
         <Lots list={this.state.adjustments} />
