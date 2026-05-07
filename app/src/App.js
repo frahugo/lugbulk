@@ -119,7 +119,17 @@ class ScanData extends React.Component {
   render() {
     return (
       <div className="mt-4">
-        <h2>{this.state.data.name}</h2>
+        <div className="d-flex align-items-center gap-3">
+          <h2 className="mb-0">{this.state.data.name}</h2>
+          {this.state.data.elementId && (
+            <img
+              src={`https://rondotruck.com/parts/${this.state.data.elementId}.jpg`}
+              width="64"
+              height="64"
+              alt={this.state.data.name}
+            />
+          )}
+        </div>
         <h5>
           Quantité prévue:&nbsp;{this.state.data.total}
           <br />
@@ -177,6 +187,7 @@ class Qrcode extends React.Component {
       name: data.name,
       total: data.total,
       lots: data.lots.split(","),
+      elementId: data.id
     };
 
     // console.log(scanData);
@@ -328,6 +339,7 @@ function Settings({ onClose }) {
                     {["Aucune", "Personnelle", "QueLug"].map((option) => (
                       <Form.Check
                         key={option}
+                        id={`balance-${option}`}
                         type="radio"
                         label={option}
                         value={option}
@@ -415,8 +427,8 @@ const App = () => {
           <h1 className="header"><span className="fw-light">Calculateur</span> <span className="fw-bold">LUGBulk</span></h1>
           <p className="text-muted mb-0 fs-5">{summary}</p>
         </div>
-        <Qrcode onSettings={() => setShowSettings(true)} />
       </Container>
+      <Qrcode onSettings={() => setShowSettings(true)} />
     </Container>
   );
 };
