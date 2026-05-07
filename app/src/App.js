@@ -25,8 +25,8 @@ function Lots(props) {
     <Table striped>
       <thead>
         <tr>
-          <th key="header-1">Lot Sizes</th>
-          <th key="header-2">Adjustments</th>
+          <th key="header-1">Tailles de lots</th>
+          <th key="header-2">Ajustements</th>
         </tr>
       </thead>
       <tbody>
@@ -44,14 +44,14 @@ function DiscrepancyForm(props) {
       <Row>
         <Col>
           <Form.Control
-            placeholder="Discrepancy"
+            placeholder="Différence"
             value={props.discrepancy}
             onChange={(e) => props.onChange(e.target.value)}
           />
         </Col>
         <Col xs="auto">
           <Button variant="primary" onClick={props.onCalculate}>
-            Calculate
+            Calculer
           </Button>
         </Col>
       </Row>
@@ -105,9 +105,9 @@ class ScanData extends React.Component {
       <div className="mt-4">
         <h2>{this.state.data.name}</h2>
         <h5>
-          Theorical count:&nbsp;{this.state.data.total}
+          Quantité prévue:&nbsp;{this.state.data.total}
           <br />
-          Real count:&nbsp;<b>{this.state.realCount}</b>
+          Quantité réelle:&nbsp;<b>{this.state.realCount}</b>
         </h5>
         <DiscrepancyForm
           discrepancy={this.state.discrepancy}
@@ -373,6 +373,11 @@ function settingsSummary() {
 }
 
 const App = () => {
+  if (new URLSearchParams(window.location.search).has("reset")) {
+    localStorage.clear();
+    window.history.replaceState(null, "", window.location.pathname);
+  }
+
   const [showSettings, setShowSettings] = useState(() => !localStorage.getItem("name"));
   const [summary, setSummary] = useState(() => settingsSummary());
 

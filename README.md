@@ -103,6 +103,14 @@ For the web app:
 
     cd app
     npm start
+
+To test on a phone, HTTPS is required for the camera to work:
+
+    npm start
+    ngrok http 3000
+
+To build the app artifacts for Amazon S3 and test them:
+
     npm run build
     http-server build
 
