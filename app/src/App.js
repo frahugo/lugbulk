@@ -1,10 +1,11 @@
 // const { Adjustment } = require("lugbulk-lib/src/adjustment");
 import { Adjustment } from "lugbulk-lib/src/adjustment";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Form, Row, Col, Container, Table } from "react-bootstrap";
 import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
 import Html5QrcodePluginMobile from "./Html5QrcodePluginMobile.jsx";
 import { isMobile } from "react-device-detect";
+import { GearFill } from "react-bootstrap-icons";
 
 import "./App.css";
 
@@ -233,9 +234,14 @@ class Qrcode extends React.Component {
       }
     } else {
       scanner = (
-        <Button variant="outline-primary" onClick={() => this.startQrcodeScanner()}>
-          Scanner code QR
-        </Button>
+        <div className="d-flex justify-content-center gap-2">
+          <Button variant="success" onClick={() => this.startQrcodeScanner()}>
+            Scanner code QR
+          </Button>
+          <Button variant="outline-secondary" onClick={this.props.onSettings} aria-label="Paramètres">
+            <GearFill />
+          </Button>
+        </div>
       );
     }
 
@@ -271,12 +277,13 @@ function Settings({ onClose }) {
   return (
     <Container>
       <Container className="p-2 pt-3 mt-2 mb-4 bg-light rounded-3">
-        <h1 className="header text-center">Paramètres</h1>
+        <h1 className="header"><span className="fw-light">Calculateur</span> <span className="fw-bold">LUGBulk</span></h1>
+        <h2 className="header text-center">Paramètres</h2>
         <Row className="justify-content-center">
           <Col xs={12} md={6}>
             <Form onSubmit={(e) => { e.preventDefault(); save(); }}>
               <Form.Group className="mb-3">
-                <Form.Label>Nom</Form.Label>
+                <Form.Label className="fw-bold">Nom(s)</Form.Label>
                 <Form.Control
                   placeholder="Entrez votre ou vos noms"
                   value={name}
@@ -285,10 +292,13 @@ function Settings({ onClose }) {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Numéro de table</Form.Label>
+                <Form.Label className="fw-bold">Numéro de table</Form.Label>
                 <Form.Control
                   placeholder="Numéro"
                   value={tableNumber}
+                  type="number"
+                  min="1"
+                  inputMode="numeric"
                   onChange={(e) => setTableNumber(e.target.value)}
                   style={{ maxWidth: "8rem" }}
                 />
@@ -296,8 +306,8 @@ function Settings({ onClose }) {
               <Form.Group className="mb-3">
                 <Row className="align-items-start">
                   <Col xs="auto">
-                    <Form.Label>Balance</Form.Label>
-                    {["Aucune", "Personelle", "QueLug"].map((option) => (
+                    <Form.Label className="fw-bold">Balance</Form.Label>
+                    {["Aucune", "Personnelle", "QueLug"].map((option) => (
                       <Form.Check
                         key={option}
                         type="radio"
@@ -310,9 +320,12 @@ function Settings({ onClose }) {
                   </Col>
                   {balanceChoice === "QueLug" && (
                     <Col xs="auto">
-                      <Form.Label>Numéro de balance</Form.Label>
+                      <Form.Label className="fw-bold">Numéro de balance</Form.Label>
                       <Form.Control
                         placeholder="Numéro"
+                        type="number"
+                        min="1"
+                        inputMode="numeric"
                         value={balanceNumber}
                         onChange={(e) => setBalanceNumber(e.target.value)}
                         style={{ maxWidth: "8rem" }}
@@ -341,16 +354,30 @@ function Settings({ onClose }) {
   );
 }
 
+function settingsSummary() {
+  const name = localStorage.getItem("name") || "";
+  const tableNumber = localStorage.getItem("tableNumber") || "";
+  const balanceChoice = localStorage.getItem("balanceChoice") || "";
+  const balanceNumber = localStorage.getItem("balanceNumber") || "";
+
+  let balancePart;
+  if (balanceChoice === "QueLug") {
+    balancePart = `avec la balance #${balanceNumber}`;
+  } else if (balanceChoice === "Personnelle") {
+    balancePart = "avec balance personnelle";
+  } else {
+    balancePart = "sans balance";
+  }
+
+  return `${name} à la table ${tableNumber} ${balancePart}`;
+}
+
 const App = () => {
-  const [showSettings, setShowSettings] = useState(false);
-  const [userName, setUserName] = useState(() => localStorage.getItem("name") || "");
+  const [showSettings, setShowSettings] = useState(() => !localStorage.getItem("name"));
+  const [summary, setSummary] = useState(() => settingsSummary());
 
-  useEffect(() => {
-    if (!userName) setShowSettings(true);
-  }, []);
-
-  function handleSettingsClose(savedName) {
-    setUserName(savedName);
+  function handleSettingsClose() {
+    setSummary(settingsSummary());
     setShowSettings(false);
   }
 
@@ -361,17 +388,11 @@ const App = () => {
   return (
     <Container>
       <Container className="p-2 pt-3 mt-2 mb-4 bg-light rounded-3">
-        <Row className="align-items-center mb-2 position-relative">
-          <Col className="text-center">
-            <h1 className="header">Calculateur LUGBulk</h1>
-          </Col>
-          <Col xs="auto" className="position-absolute end-0">
-            <Button variant="outline-secondary" size="sm" onClick={() => setShowSettings(true)}>
-              Paramètres
-            </Button>
-          </Col>
-        </Row>
-        <Qrcode />
+        <div className="text-center mb-3">
+          <h1 className="header"><span className="fw-light">Calculateur</span> <span className="fw-bold">LUGBulk</span></h1>
+          <p className="text-muted mb-0 fs-5">{summary}</p>
+        </div>
+        <Qrcode onSettings={() => setShowSettings(true)} />
       </Container>
     </Container>
   );
