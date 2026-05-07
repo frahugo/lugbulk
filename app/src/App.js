@@ -89,6 +89,15 @@ class ScanData extends React.Component {
     };
   }
 
+  postResults(payload) {
+    if (!APPS_SCRIPT_URL) return;
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify(payload),
+    }).catch((err) => console.error("Failed to record calculation:", err));
+  }
+
   calculate() {
     const adjustment = new Adjustment(this.state.data.lots);
     const qty = parseInt(this.state.quantity) || 0;
@@ -102,18 +111,19 @@ class ScanData extends React.Component {
 
     this.setState({ adjustments, realCount });
 
-    if (!APPS_SCRIPT_URL) return;
-    fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify({
-        name: this.state.data.name,
-        theoretical: theoricalCount,
-        discrepancy,
-        realCount,
-        adjustments,
-      }),
-    }).catch((err) => console.error("Failed to record calculation:", err));
+    this.postResults({
+      elementName: this.state.data.name,
+      elementId: this.state.data.elementId,
+      theoretical: theoricalCount,
+      discrepancy: discrepancy,
+      realCount: realCount,
+
+      adjustments: adjustments,
+      userName: localStorage.getItem("name") || "",
+      tableNumber: localStorage.getItem("tableNumber") || "",
+      balanceChoice: localStorage.getItem("balanceChoice") || "",
+      balanceNumber: localStorage.getItem("balanceNumber") || "",
+    });
   }
 
   render() {
@@ -344,7 +354,7 @@ function Settings({ onClose }) {
                         label={option}
                         value={option}
                         checked={balanceChoice === option}
-                        onChange={() => setBalanceChoice(option)}
+                        onChange={() => { setBalanceChoice(option); if (option !== "QueLug") setBalanceNumber(""); }}
                       />
                     ))}
                   </Col>
