@@ -1,4 +1,4 @@
-import { Adjustment } from "lugbulk-lib/src/adjustment";
+import { Deficit } from "lugbulk-lib/src/deficit";
 import React, { useState } from "react";
 import { Button, Form, Row, Col, Container, Table } from "react-bootstrap";
 import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
@@ -134,13 +134,13 @@ class ScanData extends React.Component {
         balanceNumber: localStorage.getItem("balanceNumber") || "",
       });
     } else {
-      const adjustment = new Adjustment(this.state.data.lots);
-      adjustment.distribute(discrepancy);
+      const adjustment = new Deficit(this.state.data.lots);
+      adjustment.distribute(qty);
       const adjustments = adjustment.summaries;
 
       const deficitMessage = "Retirer des pièces des sacs et mettre dans le(s) dernier(s) sac(s) en suivant les quantités suivantes selon la taille du sac.";
 
-      this.setState({ adjustments: [...adjustments].reverse(), surplusMessages: [], deficitMessage, realCount });
+      this.setState({ adjustments: [...adjustments], surplusMessages: [], deficitMessage, realCount });
 
       this.postResults({
         elementName: this.state.data.name,
