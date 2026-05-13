@@ -218,14 +218,14 @@
         {{/if_extras}}
 
         {{#if_extras this}}
-          <p class="lotsCount">{{this.lots.length}} lots + 1</p>
+          <p class="lotsCount">{{this.lots.length}} lots ++</p>
         {{else}}
           <p class="lotsCount">{{this.lots.length}} lots</p>
         {{/if_extras}}
 
         <div class="qrcode-container">
           <img class="qrcode" src="{{qrcode this ../qrcodes}}"></img>
-          <p class="instructions">Scanner le code QR ci-dessus avec le calculateur pour déterminer une répartition juste. Scanner le code QR ci-bas pour accéder au calculateur.</p>
+          <p class="instructions"><b>Scanner le code QR ci-dessus avec le calculateur pour rapporter le résultat du tri et possiblement faire des ajustements.</b><br/>Scanner le code QR ci-bas pour accéder au calculateur.</p>
         </div>
 
         <div class="app-qrcode-container">
@@ -252,14 +252,6 @@
               <div class="divCell">{{this.quantity}}</div>
             </div>
             {{/each}}
-            {{#if_extras this}}
-            <div class="divRow">
-              <div class="divCell">***</div>
-              <div class="divCell">Extra</div>
-              <div class="divCell"></div>
-              <div class="divCell">{{this.extraQuantity}}</div>
-            </div>
-            {{/if_extras}}
           </div>
         </div>
       </div>
