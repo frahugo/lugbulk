@@ -38,6 +38,9 @@ function Lots(props) {
 }
 
 function DiscrepancyForm(props) {
+  const qty = parseInt(props.quantity);
+  const isValid = props.quantity !== "" && !isNaN(qty) && qty >= 0;
+
   return (
     <Form className="mb-3 mt-3" onSubmit={(e) => e.preventDefault()}>
       <Row className="align-items-center">
@@ -66,8 +69,8 @@ function DiscrepancyForm(props) {
             style={{ maxWidth: "8rem" }}
           />
         </Col>
-        <Col xs="auto">
-          <Button className="mt-3" variant="primary" onClick={props.onCalculate}>
+        <Col className="d-flex justify-content-end">
+          <Button className="mt-3" variant="primary" onClick={props.onCalculate} disabled={!isValid}>
             Calculer
           </Button>
         </Col>
@@ -84,6 +87,7 @@ class ScanData extends React.Component {
       direction: "surplus",
       quantity: "",
       adjustments: [],
+      surplusMessages: [],
       realCount: props.data.total,
     };
   }
@@ -98,31 +102,56 @@ class ScanData extends React.Component {
   }
 
   calculate() {
-    const adjustment = new Adjustment(this.state.data.lots);
     const qty = parseInt(this.state.quantity) || 0;
-    const discrepancy = this.state.direction === "surplus" ? qty : -qty;
+    const isSurplus = this.state.direction === "surplus";
+    const discrepancy = isSurplus ? qty : -qty;
 
     const theoricalCount = parseInt(this.state.data.total);
     const realCount = theoricalCount + discrepancy;
 
-    adjustment.distribute(discrepancy);
-    const adjustments = adjustment.summaries;
+    if (isSurplus) {
+      const smallestLot = Math.min(...this.state.data.lots.map(Number));
+      const messages = [];
+      if (qty > smallestLot) {
+        messages.push("<b>La quantité en surplus semble grande</b>. Vérifier qu'un sac n'a pas été oublié et que la balance est bien calibrée.");
+      }
+      messages.push("Mettre les pièces extra dans un sac.");
+      messages.push("Écrire la quantité sur l'étiquette EXTRA fournie et coller l'étiquette sur le sac.");
 
-    this.setState({ adjustments, realCount });
+      this.setState({ surplusMessages: messages, adjustments: [], realCount });
 
-    this.postResults({
-      elementName: this.state.data.name,
-      elementId: this.state.data.elementId,
-      theoretical: theoricalCount,
-      discrepancy: discrepancy,
-      realCount: realCount,
+      this.postResults({
+        elementName: this.state.data.name,
+        elementId: this.state.data.elementId,
+        theoretical: theoricalCount,
+        discrepancy: discrepancy,
+        realCount: realCount,
+        adjustments: [],
+        userName: localStorage.getItem("name") || "",
+        tableNumber: localStorage.getItem("tableNumber") || "",
+        balanceChoice: localStorage.getItem("balanceChoice") || "",
+        balanceNumber: localStorage.getItem("balanceNumber") || "",
+      });
+    } else {
+      const adjustment = new Adjustment(this.state.data.lots);
+      adjustment.distribute(discrepancy);
+      const adjustments = adjustment.summaries;
 
-      adjustments: adjustments,
-      userName: localStorage.getItem("name") || "",
-      tableNumber: localStorage.getItem("tableNumber") || "",
-      balanceChoice: localStorage.getItem("balanceChoice") || "",
-      balanceNumber: localStorage.getItem("balanceNumber") || "",
-    });
+      this.setState({ adjustments, surplusMessages: [], realCount });
+
+      this.postResults({
+        elementName: this.state.data.name,
+        elementId: this.state.data.elementId,
+        theoretical: theoricalCount,
+        discrepancy: discrepancy,
+        realCount: realCount,
+        adjustments: adjustments,
+        userName: localStorage.getItem("name") || "",
+        tableNumber: localStorage.getItem("tableNumber") || "",
+        balanceChoice: localStorage.getItem("balanceChoice") || "",
+        balanceNumber: localStorage.getItem("balanceNumber") || "",
+      });
+    }
   }
 
   render() {
@@ -151,7 +180,14 @@ class ScanData extends React.Component {
           onQuantityChange={(val) => this.setState({ quantity: val })}
           onCalculate={() => this.calculate()}
         />
-        <Lots list={this.state.adjustments} />
+        {this.state.surplusMessages.length > 0 && (
+          <ol className="mt-3">
+            {this.state.surplusMessages.map((msg, i) => (
+              <li key={i} dangerouslySetInnerHTML={{ __html: msg }} />
+            ))}
+          </ol>
+        )}
+        {this.state.adjustments.length > 0 && <Lots list={this.state.adjustments} />}
       </div>
     );
   }
