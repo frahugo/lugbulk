@@ -13,7 +13,7 @@ const APPS_SCRIPT_URL = process.env.REACT_APP_APPS_SCRIPT_URL;
 function Lot(props) {
   return (
     <tr>
-      <td>{props.quantity}</td>
+      <td>{props.quantity} → {props.newQuantities}</td>
       <td>{props.adjustments}</td>
     </tr>
   );
@@ -30,7 +30,7 @@ function Lots(props) {
       </thead>
       <tbody>
         {props.list.map((item, index) => (
-          <Lot quantity={item.quantity} adjustments={item.adjustments} index={index} key={index} />
+          <Lot quantity={item.quantity} adjustments={item.adjustments} newQuantities={item.newQuantities} index={index} key={index} />
         ))}
       </tbody>
     </Table>
