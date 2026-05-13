@@ -83,10 +83,7 @@ function printElementLots(element, order, labelConfig) {
   var otherLots = element.lots.slice(1);
 
   const printExtra = () => {
-    if (element.extraQuantity > 0) {
-      return printExtraLot(element, labelConfig.dymo, labelConfig.lotLabelXml);
-    }
-    return Promise.resolve();
+    return printExtraLot(element, labelConfig.dymo, labelConfig.lotLabelXml);
   };
 
   if (otherLots.length > 0) {
@@ -111,8 +108,8 @@ function printExtraLot(element, dymo, labelXml) {
         <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
         <ObjectData Name="PSEUDO"></ObjectData>
         <ObjectData Name="MEMBER_ID">***</ObjectData>
-        <ObjectData Name="SEQUENCE">EXTRA</ObjectData>
-        <ObjectData Name="QUANTITY">${element.extraQuantity}</ObjectData>
+        <ObjectData Name="SEQUENCE">EXTRA (${element.extraQuantity})</ObjectData>
+        <ObjectData Name="QUANTITY"></ObjectData>
         <ObjectData Name="TOTAL">${totalLots}</ObjectData>
         <ObjectData Name="YEAR">${year}</ObjectData>
     </LabelRecord>`;

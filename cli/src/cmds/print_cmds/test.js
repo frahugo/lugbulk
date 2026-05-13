@@ -27,9 +27,11 @@ async function print(order) {
   lot = element.lots[0];
   buyer = order.findBuyer(lot.pseudo);
 
-  printLot(element, lot, buyer, labelConfig).then((result) => {
-    console.log("1 label should have been printed.");
-  });
+  printLot(element, lot, buyer, labelConfig)
+    .then(() => printExtraLot(element, labelConfig))
+    .then((result) => {
+      console.log("2 labels should have been printed.");
+    });
 }
 
 function printElement(element, labelConfig) {
@@ -55,6 +57,27 @@ function printLot(element, lot, buyer, labelConfig) {
 
   let labelSetXml = labelParts.join("");
 
+  return printLabels(labelConfig.dymo, labelConfig.lotLabelXml, labelSetXml);
+}
+
+function printExtraLot(element, labelConfig) {
+  var now = new Date();
+  var year = now.getFullYear();
+  var totalLots = 10;
+
+  var recordXml = `<LabelRecord>
+        <ObjectData Name="ELEMENT_ID">${element.id} (100)</ObjectData>
+        <ObjectData Name="ELEMENT_NAME">${element.name}</ObjectData>
+        <ObjectData Name="ELEMENT_COLOR">${element.color}</ObjectData>
+        <ObjectData Name="PSEUDO"></ObjectData>
+        <ObjectData Name="MEMBER_ID">***</ObjectData>
+        <ObjectData Name="SEQUENCE">EXTRA (${element.extraQuantity})</ObjectData>
+        <ObjectData Name="QUANTITY"></ObjectData>
+        <ObjectData Name="TOTAL">${totalLots}</ObjectData>
+        <ObjectData Name="YEAR">${year}</ObjectData>
+    </LabelRecord>`;
+
+  var labelSetXml = `<LabelSet>${recordXml}</LabelSet>`;
   return printLabels(labelConfig.dymo, labelConfig.lotLabelXml, labelSetXml);
 }
 
