@@ -88,6 +88,7 @@ class ScanData extends React.Component {
       quantity: "",
       adjustments: [],
       surplusMessages: [],
+      deficitMessage: "",
       realCount: props.data.total,
     };
   }
@@ -118,7 +119,7 @@ class ScanData extends React.Component {
       messages.push("Mettre les pièces extra dans un sac.");
       messages.push("Écrire la quantité sur l'étiquette EXTRA fournie et coller l'étiquette sur le sac.");
 
-      this.setState({ surplusMessages: messages, adjustments: [], realCount });
+      this.setState({ surplusMessages: messages, adjustments: [], deficitMessage: "", realCount });
 
       this.postResults({
         elementName: this.state.data.name,
@@ -137,7 +138,9 @@ class ScanData extends React.Component {
       adjustment.distribute(discrepancy);
       const adjustments = adjustment.summaries;
 
-      this.setState({ adjustments, surplusMessages: [], realCount });
+      const deficitMessage = "Retirer des pièces des sacs et mettre dans le(s) dernier(s) sac(s) en suivant les quantités suivantes selon la taille du sac.";
+
+      this.setState({ adjustments: [...adjustments].reverse(), surplusMessages: [], deficitMessage, realCount });
 
       this.postResults({
         elementName: this.state.data.name,
@@ -187,7 +190,12 @@ class ScanData extends React.Component {
             ))}
           </ol>
         )}
-        {this.state.adjustments.length > 0 && <Lots list={this.state.adjustments} />}
+        {this.state.adjustments.length > 0 && (
+          <>
+            <p className="mt-3">{this.state.deficitMessage}</p>
+            <Lots list={this.state.adjustments} />
+          </>
+        )}
       </div>
     );
   }
