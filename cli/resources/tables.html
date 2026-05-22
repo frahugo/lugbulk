@@ -1,0 +1,83 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+      html {
+        font-size: 10px;
+        font-family: 'Ubuntu' !important;
+        font-weight: 400;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      table tr td {
+        vertical-align: middle;
+      }
+
+      table tr td:nth-child(1) {
+        text-align: left;
+      }
+
+      table tr td:nth-child(2) {
+        width: 160px;
+        text-align: right;
+      }
+
+      .label {
+        font-size: 2em;
+        font-weight: 400;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 10em;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1;
+      }
+
+      .qrcode-side img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .qrcode-side span {
+        display: block;
+        font-size: 1.2em;
+        margin-bottom: 4px;
+      }
+
+      .spacer {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    {{#each tables}}
+      <table>
+        <tr>
+          <td>
+            <p class="label">Table</p>
+            <h1>{{this.number}}</h1>
+          </td>
+          <td>
+            <div class="qrcode-side">
+              <span>lugbulkcalc.com</span>
+              <img src="{{../appQrcode}}"></img>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      {{#if_multiple_of_three_tables @index ../count}}
+        <div style="page-break-after: always"></div>
+      {{else}}
+        <div class="spacer"></div>
+      {{/if_multiple_of_three_tables}}
+    {{/each}}
+  </body>
+</html>
