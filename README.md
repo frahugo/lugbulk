@@ -121,12 +121,15 @@ For a project support or LUG bulk order, first, you need to export sheet with th
 buyers and quantities (the order sheet, not the nominations sheet).
 
 - First, go in the Google Sheet and download as CSV the two sheets (replace X with appropriate number):
-    - Commande: rename to lb202X-orig.csv
-    - MembresCommande: rename to lb202X-membres.csv
-- Open lb202X-orig.csv in LibreOffice or other software:
+    - Sheet `Commande`: rename to `lb202X-orig.csv`
+    - Sheet `MembresCommande`: rename to `lb202X-membres.csv`
+- Open `lb202X-orig.csv` in LibreOffice or other software:
     - Make sure that the first row has LUG member IDs that are included in the bulk.
     - Review the buyers columns and remove the non-participating buyers.
     - Go at the bottom and look at the total pieces per buyer. If a buyer has 0 as the total, delete the column.
-    - Then save the file as CSV format to lb202X.csv
+    - For column with id 164 (extra quantities), Set name to `Extra` and pseudo to `extra` (important) and put `Acheteur` below, like the other members.
     - Remove bottow rows (subtotals, totals, ...)
+    - Then save the file as CSV format to `lb202X.csv`
 - Follow instruction above to generate the PDF files and labels.
+
+Note: when generating the `elements.pdf` file, if an element does not fit on one page, we might have to reduce the font size of the table rows.
