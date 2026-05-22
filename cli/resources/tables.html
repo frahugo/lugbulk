@@ -19,12 +19,29 @@
       }
 
       table tr td:nth-child(1) {
-        text-align: left;
+        text-align: center;
       }
 
       table tr td:nth-child(2) {
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      table tr td:nth-child(3) {
         width: 160px;
         text-align: right;
+      }
+
+      .wifi-label {
+        font-size: 1em;
+        font-weight: 700;
+        margin: 0 0 4px 0;
+      }
+
+      .wifi-value {
+        font-size: 1.1em;
+        font-weight: 400;
+        margin: 0 0 10px 0;
       }
 
       .label {
@@ -52,7 +69,7 @@
       }
 
       .spacer {
-        margin-top: 30px;
+        margin-top: 42px;
       }
     </style>
   </head>
@@ -63,6 +80,12 @@
           <td>
             <p class="label">Table</p>
             <h1>{{this.number}}</h1>
+          </td>
+          <td>
+            <p class="wifi-label">Réseau WiFi</p>
+            <p class="wifi-value">Mathieu-Lusignan</p>
+            <p class="wifi-label">Mot de passe</p>
+            <p class="wifi-value">PREFIL.CA</p>
           </td>
           <td>
             <div class="qrcode-side">
