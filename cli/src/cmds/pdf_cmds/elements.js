@@ -127,3 +127,7 @@ Handlebars.registerHelper("id", function (order, pseudo) {
 Handlebars.registerHelper("qrcode", function (element, qrcodes) {
   return qrcodes[element.id];
 });
+
+Handlebars.registerHelper("lastChar", function (str) {
+  return str ? str.charAt(str.length - 1) : "";
+});
