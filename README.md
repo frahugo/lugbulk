@@ -74,6 +74,8 @@ To create the PDF files:
 
     bin/lugbulk pdf elements path-to-order-csv
     bin/lugbulk pdf megalots path-to-order-csv
+    bin/lugbulk pdf tables path-to-order-csv
+    bin/lugbulk pdf dispatch path-to-order-csv
     bin/lugbulk pdf buyers path-to-order-csv path-to-members-csv
 
 To show help:

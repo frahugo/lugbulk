@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+      html {
+        font-size: 10px;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 400;
+      }
+
+      .zone-page {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .zone-letter {
+        font-size: 45em;
+        font-weight: 700;
+        line-height: 1;
+        margin: 0;
+        text-align: center;
+        color: #111;
+      }
+
+      .buyer-list {
+        margin-top: 16px;
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .buyer-list th {
+        font-size: 1.4em;
+        font-weight: 700;
+        text-align: left;
+        border-bottom: 1px solid #aaa;
+        padding: 2px 8px;
+        color: #555;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .buyer-list td {
+        font-size: 1.6em;
+        padding: 3px 8px;
+        vertical-align: middle;
+      }
+
+      .buyer-list tr:nth-child(even) td {
+        background-color: #f4f4f4;
+      }
+
+      .buyer-id {
+        font-weight: 700;
+        white-space: nowrap;
+        width: 1%;
+      }
+
+      .buyer-pseudo {
+        white-space: nowrap;
+        width: 1%;
+        color: #444;
+      }
+
+      .buyer-fullname {
+        color: #222;
+      }
+
+      .page-break {
+        page-break-after: always;
+      }
+    </style>
+  </head>
+  <body>
+    {{#each zones}}
+      <div class="zone-page">
+        <h1 class="zone-letter">{{this.letter}}</h1>
+
+        <table class="buyer-list">
+          <tbody>
+            {{#each this.buyers}}
+              <tr>
+                <td class="buyer-id">{{buyerId this}}</td>
+                <td class="buyer-pseudo">{{this.pseudo}}</td>
+                <td class="buyer-fullname">{{this.fullName}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+      {{#isLastZone @index ../count}}
+      {{else}}
+        <div class="page-break"></div>
+      {{/isLastZone}}
+    {{/each}}
+  </body>
+</html>
