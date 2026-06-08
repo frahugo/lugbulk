@@ -38,9 +38,31 @@ async function print(order, output) {
     },
   };
 
+  const distributorMap = {};
+  for (const buyer of order.buyers) {
+    if (buyer.distribution_method === "person" && buyer.distributor_name) {
+      if (!distributorMap[buyer.distributor_name]) distributorMap[buyer.distributor_name] = [];
+      distributorMap[buyer.distributor_name].push(buyer);
+    }
+  }
+  const distributors = Object.keys(distributorMap)
+    .sort()
+    .map((name) => ({ name, buyers: distributorMap[name] }));
+
+  const regionMap = {};
+  for (const buyer of order.buyers) {
+    if (buyer.distribution_method === "region" && buyer.region) {
+      if (!regionMap[buyer.region]) regionMap[buyer.region] = [];
+      regionMap[buyer.region].push(buyer);
+    }
+  }
+  const regions = Object.keys(regionMap)
+    .sort()
+    .map((name) => ({ name, buyers: regionMap[name] }));
+
   var document = {
     html: html,
-    data: { order: order, count: order.buyers.length },
+    data: { order: order, count: order.buyers.length, regions, distributors },
     path: output,
     type: "",
   };

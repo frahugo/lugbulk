@@ -42,6 +42,35 @@
         margin-top: 10px;
       }
 
+      .region-page {
+        text-align: left;
+        padding: 10px;
+      }
+
+      .region-page h2 {
+        font-size: 3em;
+        font-weight: 700;
+        line-height: 1.2em;
+        margin-bottom: 20px;
+      }
+
+      .region-buyers {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .region-buyers li {
+        font-size: 1.6em;
+        padding: 6px 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .region-buyers .member-id {
+        font-weight: 700;
+        margin-right: 10px;
+      }
+
       .badge {
         display: inline-block;
         font-weight: 700;
@@ -72,6 +101,34 @@
       {{else}}
         <div class="spacer"></div>
       {{/if_multiple_of_three}}
+    {{/each}}
+
+    {{#each regions}}
+      <div style="page-break-before: always;" class="region-page">
+        <h2>Région — {{this.name}}</h2>
+        <ul class="region-buyers">
+          {{#each this.buyers}}
+            <li>
+              <span class="member-id">{{this.memberId}}</span>
+              {{this.pseudo}} — {{this.fullName}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/each}}
+
+    {{#each distributors}}
+      <div style="page-break-before: always;" class="region-page">
+        <h2>Via — {{this.name}}</h2>
+        <ul class="region-buyers">
+          {{#each this.buyers}}
+            <li>
+              <span class="member-id">{{this.memberId}}</span>
+              {{this.pseudo}} — {{this.fullName}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
     {{/each}}
   </body>
 </html>
