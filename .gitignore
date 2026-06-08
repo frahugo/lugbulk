@@ -3,3 +3,4 @@ cli/*.pdf
 cli/*.csv
 app/build
 app/.env.*.local
+.env

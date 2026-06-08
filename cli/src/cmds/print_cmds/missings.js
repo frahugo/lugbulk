@@ -7,10 +7,10 @@ const { Missings } = require("lugbulk-lib/src/missings");
 exports.command = "missings <order_csv_file> <missing_elements_csv_file>";
 exports.desc = "Print missings parts per megalot";
 exports.builder = {};
-exports.handler = function (argv) {
+exports.handler = async function (argv) {
   const order = new Order();
   const missings = new Missings();
-  order.load(argv.order_csv_file);
+  await order.load(argv.order_csv_file);
   missings.load(argv.missing_elements_csv_file);
   printMissings(order, missings);
   // printTest();

@@ -10,11 +10,11 @@ const { Order } = require("lugbulk-lib/src/order");
 exports.command = "megalots <order_csv_file>";
 exports.desc = "Generate PDF file for megalots";
 exports.builder = {};
-exports.handler = function (argv) {
+exports.handler = async function (argv) {
   const order = new Order();
   const output = argv.output === undefined ? "./megalots.pdf" : argv.output;
 
-  order.load(argv.order_csv_file);
+  await order.load(argv.order_csv_file);
   print(order, output);
 };
 

@@ -9,10 +9,10 @@ const { Order } = require("lugbulk-lib/src/order");
 exports.command = "lots <order_csv_file>";
 exports.desc = "List lots from a LugBulk order";
 exports.builder = {};
-exports.handler = function (argv) {
+exports.handler = async function (argv) {
   const order = new Order();
 
-  order.load(argv.order_csv_file);
+  await order.load(argv.order_csv_file);
 
   if (argv.output === undefined) {
     var table = [];

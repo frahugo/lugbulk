@@ -50,9 +50,13 @@ To list the elements:
 
     bin/lugbulk list elements path-to-order-csv
 
-To list the buyers:
+To list the buyers' lots:
 
     bin/lugbulk list lots path-to-order-csv
+
+To list the buyers:
+
+    bin/lugbulk list buyers path-to-order-csv
 
 The `list` commands can send output to a CSV file by appending `-o csv-file-name` to the command.
 
@@ -132,6 +136,7 @@ buyers and quantities (the order sheet, not the nominations sheet).
     - For column with id 164 (extra quantities), Set name to `Extra` and pseudo to `extra` (important) and put `Acheteur` below, like the other members.
     - Remove bottow rows (subtotals, totals, ...)
     - Then save the file as CSV format to `lb202X.csv`
+- Set the right URL for the CSV Google Sheet for distribution instructions in your `.env` file (see `.env.example`). The URL should be the one Google Sheet gives you when you create a public CSV link for the sheet "Soumissions".
 - Follow instruction above to generate the PDF files and labels.
 
 Note: when generating the `elements.pdf` file, if an element does not fit on one page, we might have to reduce the font size of the table rows.

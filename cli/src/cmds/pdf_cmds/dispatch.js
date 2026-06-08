@@ -8,11 +8,11 @@ const { Order } = require("lugbulk-lib/src/order");
 exports.command = "dispatch <order_csv_file>";
 exports.desc = "Generate PDF file for buyer zone dispatch";
 exports.builder = {};
-exports.handler = function (argv) {
+exports.handler = async function (argv) {
   const order = new Order();
   const output = argv.output === undefined ? "./dispatch.pdf" : argv.output;
 
-  order.load(argv.order_csv_file);
+  await order.load(argv.order_csv_file);
   print(order, output);
 };
 

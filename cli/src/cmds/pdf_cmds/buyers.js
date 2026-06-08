@@ -10,12 +10,12 @@ const { Club } = require("lugbulk-lib/src/club");
 exports.command = "buyers <order_csv_file> <members_csv_file>";
 exports.desc = "Generate PDF file for buyers";
 exports.builder = {};
-exports.handler = function (argv) {
+exports.handler = async function (argv) {
   const order = new Order();
   const club = new Club();
   const output = argv.output === undefined ? "./buyers.pdf" : argv.output;
 
-  order.load(argv.order_csv_file);
+  await order.load(argv.order_csv_file);
   club.load(argv.members_csv_file);
   print(order, club, output);
 };
