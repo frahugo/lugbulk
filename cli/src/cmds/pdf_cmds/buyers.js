@@ -66,6 +66,18 @@ Handlebars.registerHelper("region", function (club, pseudo) {
   return club.findMember(pseudo).region;
 });
 
+Handlebars.registerHelper("distribution_badge", function (method) {
+  const labels = { self: "Sur place", region: "Région", person: "Via" };
+  const label = labels[method] || method || "";
+  return new Handlebars.SafeString(`<span class="badge">${label}</span>`);
+});
+
+Handlebars.registerHelper("distribution_detail", function (method, distributorName, region) {
+  if (method === "person") return distributorName || "";
+  if (method === "region") return region || "";
+  return "";
+});
+
 Handlebars.registerHelper("if_multiple_of_three", function (conditional, count, options) {
   if (conditional + 1 == count) {
     // Do nothing

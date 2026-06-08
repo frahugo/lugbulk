@@ -19,19 +19,36 @@
       h2 {
         font-size: 2em;
         font-weight: 400;
+        line-height: 0em;
       }
 
       h3 {
         font-size: 1.5em;
         font-weight: 400;
+        line-height: 0.5em;
       }
 
       table tr td:nth-child(1) {
-        width: 150px;
+        width: 200px;
       }
 
       .spacer {
         margin-top: 75px;
+      }
+
+      .distribution {
+        font-size: 1.2em;
+        font-weight: 400;
+        margin-top: 10px;
+      }
+
+      .badge {
+        display: inline-block;
+        font-weight: 700;
+        padding: 2px 10px;
+        border-radius: 4px;
+        background-color: #e0e0e0;
+        color: #333;
       }
     </style>
   </head>
@@ -44,9 +61,8 @@
           </td>
           <td>
             <h2>{{this.pseudo}}</h2>
-            <h3>
-              {{this.fullName}}
-            </h3>
+            <h3>{{this.fullName}}</h3>
+            <p class="distribution">{{{distribution_badge this.distribution_method}}} {{distribution_detail this.distribution_method this.distributor_name this.region}}</p>
           </td>
         </tr>
       </table>
